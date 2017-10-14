@@ -1,9 +1,14 @@
 
 package domain;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
@@ -22,6 +27,8 @@ public abstract class Actor extends DomainEntity {
 
 	public Actor() {
 		super();
+
+		this.instances = new HashSet<Instance>();	// Instances is updated automatically
 	}
 
 	@NotBlank
@@ -67,6 +74,19 @@ public abstract class Actor extends DomainEntity {
 		this.address = address;
 	}
 
+
 	//RelationShips	------------------------
 
+	private Collection<Instance>	instances;
+
+
+	@NotNull
+	@OneToMany(mappedBy = "actor")
+	public Collection<Instance> getInstances() {
+		return this.instances;
+	}
+
+	public void setInstances(final Collection<Instance> instances) {
+		this.instances = instances;
+	}
 }
