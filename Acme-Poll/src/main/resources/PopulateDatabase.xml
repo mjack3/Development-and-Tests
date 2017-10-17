@@ -47,4 +47,54 @@
 			</list>
 		</property>
 	</bean>
+	
+	<bean id="userAccount4" class="security.UserAccount">
+		<property name="username" value="poller3" />
+		<property name="password" value="431699a6bfcf8c7cc248c9d4d26fa0d6" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="POLLER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount5" class="security.UserAccount">
+		<property name="username" value="poller4" />
+		<property name="password" value="6e661e307baff2a5e80baeca3d314c8e" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="POLLER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount6" class="security.UserAccount">
+		<property name="username" value="poller5" />
+		<property name="password" value="e8c35bdecce54ac0ad02c641489162de" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="POLLER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- ADMIN -->
+	
+	<bean id="admin1" class="domain.Administrator">
+  		<property name="userAccount" ref="userAccount1" />
+  		<property name="name" value="adminName" />
+  		<property name="surname" value="adminSurname" />
+  		<property name="email" value="adminEmail@admin.es" />
+  		<property name="phone" value="+222222" />
+  		<property name="address" value="11560" />
+ 	</bean>
+	
+	<!-- POLLERS -->
+	
 </beans>

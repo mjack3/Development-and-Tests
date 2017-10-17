@@ -10,9 +10,11 @@ import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.Valid;
 import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -30,7 +32,7 @@ public class Poll extends DomainEntity {
 		super();
 
 		this.questions = new HashSet<Question>();	// Min initialization + Question must be different
-		this.setInstances(new HashSet<Instance>());		// Min initialization 
+		this.instances = new HashSet<Instance>();		// Min initialization 
 	}
 
 
@@ -95,6 +97,7 @@ public class Poll extends DomainEntity {
 
 	private Collection<Question>	questions;
 	private Collection<Instance>	instances;
+	private Poller					poller;
 
 
 	@NotEmpty
@@ -106,6 +109,14 @@ public class Poll extends DomainEntity {
 	public void setQuestions(final Collection<Question> questions) {
 		this.questions = questions;
 	}
+	public void addQuestion(final Question question) {
+		this.questions.add(question);
+		question.setPoll(this);
+	}
+	public void removeQuestion(final Question question) {
+		this.questions.remove(question);
+		question.setPoll(this);
+	}
 
 	@NotNull
 	@OneToMany(mappedBy = "poll")
@@ -115,6 +126,17 @@ public class Poll extends DomainEntity {
 
 	public void setInstances(final Collection<Instance> instances) {
 		this.instances = instances;
+	}
+
+	@Valid
+	@NotNull
+	@ManyToOne(optional = false)
+	public Poller getPoller() {
+		return this.poller;
+	}
+
+	public void setPoller(final Poller poller) {
+		this.poller = poller;
 	}
 
 }

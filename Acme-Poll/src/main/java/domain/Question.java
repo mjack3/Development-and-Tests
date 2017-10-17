@@ -27,9 +27,9 @@ public class Question extends DomainEntity {
 	}
 
 
-	private int							number;
-	private String						statment;
-	private final Collection<String>	answers;
+	private int					number;
+	private String				statment;
+	private Collection<String>	answers;
 
 
 	@Min(0)
@@ -54,6 +54,9 @@ public class Question extends DomainEntity {
 	@ElementCollection
 	public Collection<String> getAnswers() {
 		return this.answers;
+	}
+	public void setAnswers(final Collection<String> answers) {
+		this.answers = answers;
 	}
 	public void addAnswer(final String answer) {
 		this.answers.add(answer);

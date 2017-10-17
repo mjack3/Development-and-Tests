@@ -91,4 +91,13 @@ public class Instance extends DomainEntity {
 		this.answers = answers;
 	}
 
+	public void addAnswer(final Answer answer) {
+		this.answers.add(answer);
+		answer.setInstance(this);
+	}
+	public void removeAnswer(final Answer answer) {
+		this.answers.remove(answer);
+		answer.setInstance(this);
+	}
+
 }
