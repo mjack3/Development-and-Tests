@@ -2,6 +2,7 @@
 package domain;
 
 import java.util.Collection;
+import java.util.HashSet;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -18,7 +19,7 @@ public class Instance extends DomainEntity {
 
 	public Instance() {
 		super();
-
+		this.answers = new HashSet<>();
 	}
 
 
@@ -59,9 +60,7 @@ public class Instance extends DomainEntity {
 	private Collection<Answer>	answers;
 
 
-	@Valid
-	@NotNull
-	@ManyToOne(optional = false)
+	@ManyToOne
 	public Actor getActor() {
 		return this.actor;
 	}
