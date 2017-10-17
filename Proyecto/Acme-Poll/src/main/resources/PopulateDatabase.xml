@@ -461,7 +461,7 @@
 		<property name="name" value="real anonimous" />
 		<property name="gender">
 			<bean class="domain.Gender">
-				
+				<property name="gender" value="UNDEFINED"/>
 			</bean>
 		</property>
 		<property name="poll" ref="poll3"	/>
