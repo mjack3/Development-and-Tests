@@ -49,7 +49,11 @@
 		<security:intercept-url pattern="/welcome/lssi.do"
 			access="permitAll" />
 
+		<!-- Reme -->
 		
+		<security:intercept-url pattern="/poll/list.do" access="permitAll" />
+		
+		<!-- Fin Reme -->
 
 		<security:intercept-url pattern="/**"
 			access="hasRole('NONE')" />

@@ -19,12 +19,13 @@
 
 	<util:list id="converters">
 		
-		<!--<bean class="converters.AuthorityToStringConverter" />-->
+		<bean class="converters.AuthorityToStringConverter" />
 		<bean class="converters.UserAccountToStringConverter" />
-		
+		<bean class="converters.PollToStringConverter" />
 		
 
 		<bean class="converters.StringToUserAccountConverter" />
+		<bean class="converters.StringToPollConverter" />
 		
 		
 		
