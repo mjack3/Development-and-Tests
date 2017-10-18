@@ -80,7 +80,7 @@ public class Poll extends DomainEntity {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	public Date getTimeActive() {
 		return this.timeActive;
 	}

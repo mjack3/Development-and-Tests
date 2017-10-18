@@ -1,6 +1,7 @@
 
 package controllers;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,11 +28,13 @@ public class PollController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
+
+		final Date now = new Date();
 		result = new ModelAndView("poll/list");
 		result.addObject("requestURI", "poll/list.do");
-		final List<Poll> catalogue = this.pollService.findAll();
+		final List<Poll> catalogue = this.pollService.findPollActivated();
 		result.addObject("poll", catalogue);
-
+		result.addObject("timeActive", now);
 		return result;
 	}
 

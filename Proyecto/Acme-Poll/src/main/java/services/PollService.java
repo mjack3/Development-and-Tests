@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -37,6 +38,17 @@ public class PollService {
 	public Poll findOne(final Integer arg0) {
 		Assert.notNull(arg0);
 		return this.pollRepository.findOne(arg0);
+	}
+
+	public List<Poll> findPollActivated() {
+		final Date now = new Date();
+
+		//DateFormat.getDateInstance().format(now);
+
+		//System.out.print(now.toString());
+
+		return this.pollRepository.findPollActivated(now);
+
 	}
 
 }
