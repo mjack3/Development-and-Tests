@@ -20,4 +20,4 @@
 <a class="fNiv" href="welcome/lopd.do"><spring:message code="master.page.lopd" /></a>
 <a class="fNiv" href="welcome/lssi.do"><spring:message code="master.page.lssi" /></a> <br />
 
-<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Acme-Raffle Co., Inc.</b>
+<b>Copyright &copy; <fmt:formatDate value="${date}" pattern="yyyy" /> Acme-Poll Co., Inc.</b>

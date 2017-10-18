@@ -1,5 +1,5 @@
-<h1>Acme-Raffle</h1>
-<p>This is the project Acme-Raffle for the group of the subject DP formed by</p> 
+<h1>Acme-Poll</h1>
+<p>This is the project Acme-Poll for the group of the subject DP formed by</p> 
 
 <hr/>
 
