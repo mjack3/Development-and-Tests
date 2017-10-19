@@ -50,6 +50,11 @@
 
 					
 					</security:authorize>
+					
+						<security:authorize access="hasRole('ADMINISTRATOR')">
+								<li><a href="administrator/edit.do?userAccountID=${id}"><spring:message code="master.page.administrator.edit" /></a></li>
+							</security:authorize>
+					
 				</ul>
 			</div>
 		</div>

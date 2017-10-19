@@ -28,6 +28,7 @@
 		
 	
 		<value>/views/poll/messages</value>
+		<value>/views/administrator/messages</value>
 		
 		
 	</util:list>

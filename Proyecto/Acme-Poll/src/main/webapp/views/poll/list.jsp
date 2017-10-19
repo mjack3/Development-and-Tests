@@ -53,6 +53,12 @@
 				<spring:message	code="poll.instances" />
 			</a>
 	</display:column>
+	
+	<display:column>
+			<a href="poller/list.do?pollId=${row.id}">
+				<spring:message	code="poll.poller" />
+			</a>
+	</display:column>
 
 
 </display:table>

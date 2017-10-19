@@ -27,6 +27,7 @@
 		<value>/views/legislation/tiles.xml</value>
 		
 		<value>/views/poll/tiles.xml</value>
+		<value>/views/administrator/tiles.xml</value>
 		
 		
 		
