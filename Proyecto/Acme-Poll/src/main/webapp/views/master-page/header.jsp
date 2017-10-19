@@ -53,7 +53,11 @@
 					
 						<security:authorize access="hasRole('ADMINISTRATOR')">
 								<li><a href="administrator/edit.do?userAccountID=${id}"><spring:message code="master.page.administrator.edit" /></a></li>
-							</security:authorize>
+						</security:authorize>
+						
+						<security:authorize access="hasRole('POLLER')">
+								<li><a href="poller/edit.do?userAccountID=${id}"><spring:message code="master.page.poller.edit" /></a></li>
+						</security:authorize>
 					
 				</ul>
 			</div>

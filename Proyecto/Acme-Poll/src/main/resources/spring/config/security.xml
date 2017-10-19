@@ -55,6 +55,9 @@
 		<security:intercept-url pattern="/administrator/edit.do" access="hasRole('ADMINISTRATOR')" />
 		<security:intercept-url pattern="/administrator/save-administrator.do" access="hasRole('ADMINISTRATOR')" />
 		
+		<security:intercept-url pattern="/poller/edit.do" access="hasRole('POLLER')" />
+		<security:intercept-url pattern="/poller/save-poller.do" access="hasRole('POLLER')" />
+		
 		<!-- Fin Reme -->
 
 		<security:intercept-url pattern="/**"

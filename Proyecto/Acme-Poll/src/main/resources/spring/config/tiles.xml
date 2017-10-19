@@ -28,6 +28,7 @@
 		
 		<value>/views/poll/tiles.xml</value>
 		<value>/views/administrator/tiles.xml</value>
+		<value>/views/poller/tiles.xml</value>
 		
 		
 		

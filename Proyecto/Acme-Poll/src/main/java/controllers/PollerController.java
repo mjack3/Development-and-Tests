@@ -35,7 +35,7 @@ public class PollerController {
 	}
 
 	@RequestMapping(value = "/save-poller", method = RequestMethod.POST, params = "save")
-	public ModelAndView saveAdministrator(@Valid final Poller poller, final BindingResult binding) {
+	public ModelAndView savePoller(@Valid final Poller poller, final BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors()) {
 			for (final ObjectError e : binding.getAllErrors())
