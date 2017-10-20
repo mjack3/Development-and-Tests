@@ -55,7 +55,7 @@
 	</display:column>
 	
 	<display:column>
-			<a href="poller/list.do?pollId=${row.id}">
+			<a href="poller/view.do?pollId=${row.id}">
 				<spring:message	code="poll.poller" />
 			</a>
 	</display:column>

@@ -21,5 +21,10 @@
 		<put-attribute name="title" value="Edit profile" />
 		<put-attribute name="body" value="/views/poller/edit.jsp" />
 	</definition>
+	
+	<definition name="poller/view" extends="master.page">	
+		<put-attribute name="title" value="Poller" />
+		<put-attribute name="body" value="/views/poller/view.jsp" />
+	</definition>
 
 </tiles-definitions>

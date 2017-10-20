@@ -22,6 +22,17 @@ public class PollerController {
 	private PollerService pollerService;
 
 
+	@RequestMapping(value = "view", method = RequestMethod.GET)
+	public ModelAndView view(final Poller poller, final Integer id) {
+		ModelAndView res;
+
+		res = new ModelAndView("poller/view");
+		res.addObject("requestURI", "poll/view.do");
+		res.addObject("poller", this.pollerService.findOne(id));
+
+		return res;
+	}
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(final int userAccountID) {
 		ModelAndView result;
