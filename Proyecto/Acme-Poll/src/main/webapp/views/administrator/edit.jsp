@@ -45,6 +45,10 @@
 		<input class="form-control" value="${administrator.phone}" type="text" name="phone"/>
 		<form:errors cssClass="error" path="phone" /> <br />
 		
+		<label> <spring:message code="admin.address"/> </label><br />
+		<input class="form-control" value="${administrator.address}" type="text" name="address"/>
+		<form:errors cssClass="error" path="address" /> <br />
+		
 		
 		</div>
 		

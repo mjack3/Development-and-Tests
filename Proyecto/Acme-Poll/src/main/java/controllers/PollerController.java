@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Poller;
@@ -22,13 +23,26 @@ public class PollerController {
 	private PollerService pollerService;
 
 
-	@RequestMapping(value = "view", method = RequestMethod.GET)
-	public ModelAndView view(final Poller poller, final Integer id) {
+	/*
+	 * @RequestMapping(value = "/view", method = RequestMethod.GET)
+	 * public ModelAndView view(final Poller poller, final Integer id) {
+	 * ModelAndView res;
+	 *
+	 * res = new ModelAndView("poller/view");
+	 * res.addObject("requestURI", "poll/view.do");
+	 * res.addObject("poller", this.pollerService.findPollerFromPoll(id));
+	 * res.addObject("poller", poller);
+	 *
+	 * return res;
+	 * }
+	 */
+
+	@RequestMapping("/view")
+	public ModelAndView view(@RequestParam final Poller q) {
 		ModelAndView res;
 
 		res = new ModelAndView("poller/view");
-		res.addObject("requestURI", "poll/view.do");
-		res.addObject("poller", this.pollerService.findOne(id));
+		res.addObject("poller", q);
 
 		return res;
 	}

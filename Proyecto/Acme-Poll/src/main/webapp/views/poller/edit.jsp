@@ -47,6 +47,11 @@
 		<form:errors cssClass="error" path="phone" /> <br />
 		
 		
+		<label> <spring:message code="poller.address"/> </label><br />
+		<input class="form-control" value="${poller.address}" type="text" name="address"/>
+		<form:errors cssClass="error" path="address" /> <br />
+		
+		
 		</div>
 		
 		<spring:message code="actor.save" var="actorSaveHeader"/>

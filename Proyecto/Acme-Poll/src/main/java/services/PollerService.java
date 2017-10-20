@@ -52,6 +52,7 @@ public class PollerService {
 			p.setEmail(poller.getEmail());
 			p.setPhone(poller.getPhone());
 			p.setSurname(poller.getSurname());
+			p.setAddress(poller.getAddress());
 			p.setPolls(poller.getPolls());
 			p = this.pollerRepository.save(p);
 		} else {
@@ -70,6 +71,11 @@ public class PollerService {
 	public Poller findActorByUsername(final Integer id) {
 		Assert.notNull(id);
 		return this.pollerRepository.findOneUserAccount(id);
+	}
+
+	public Poller findPollerFromPoll(final int id) {
+		Assert.notNull(id);
+		return this.pollerRepository.findPollerFromPoll(id);
 	}
 
 }
