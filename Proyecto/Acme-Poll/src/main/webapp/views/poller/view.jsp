@@ -11,10 +11,10 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 
-<acme:acme_view entity="${poller}" skip_fields="name,surname,email,phone,address,polls"  >
 
  <tr>
-	<td> <b><spring:message code="poller.name"/></b> <jstl:out value="${poller.name}"/> </td>
+	<td> <b><spring:message code="poller.name" var="nameHeader"/></b>  </td>
+	<jstl:out value="${nameHeader}"/><jstl:out value="${poller.name}"/>
 <td>
 
  <tr>
@@ -33,6 +33,6 @@
 	<td> <b><spring:message code="poller.address"/></b> <jstl:out value="${poller.address}"/> </td>
 <td>
 
-</acme:acme_view>
+
 
 <br/>

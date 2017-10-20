@@ -9,15 +9,14 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Poller;
 import services.PollerService;
 
-@RequestMapping("/poller")
 @Controller
-public class PollerController {
+@RequestMapping("/poller")
+public class PollerController extends AbstractController {
 
 	@Autowired
 	private PollerService pollerService;
@@ -38,13 +37,19 @@ public class PollerController {
 	 */
 
 	@RequestMapping("/view")
-	public ModelAndView view(@RequestParam final Poller q) {
-		ModelAndView res;
+	public ModelAndView view(final Integer pollId) {
+		ModelAndView result;
 
-		res = new ModelAndView("poller/view");
-		res.addObject("poller", q);
+		result = new ModelAndView("poller/view");
 
-		return res;
+		final Poller p = this.pollerService.findPollerFromPoll(pollId);
+
+		result.addObject("poller", p);
+
+		System.out.println(p);
+		System.out.println(pollId);
+
+		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
