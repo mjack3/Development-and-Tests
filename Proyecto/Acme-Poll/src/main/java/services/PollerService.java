@@ -78,4 +78,9 @@ public class PollerService {
 		return this.pollerRepository.findPollerFromPoll(id);
 	}
 
+	public List<Poller> pollersBanned() {
+		// TODO Auto-generated method stub
+		return this.pollerRepository.pollersBanned();
+	}
+
 }

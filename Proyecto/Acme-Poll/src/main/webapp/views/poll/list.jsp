@@ -16,51 +16,73 @@
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
-<%@taglib prefix="display" uri="http://displaytag.sf.net"%>>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 
 
-<display:table pagesize="5"  keepStatus="true" name="poll" requestURI="${requestURI}" id="row" class="table table-over">
-	
+<display:table pagesize="5" keepStatus="true" name="poll"
+	requestURI="${requestURI}" id="row" class="table table-over">
+
 	<!-- Attributes -->
-	
+
 	<spring:message code="poll.title" var="titleHeader" />
-	<display:column property="title" title="${titleHeader}" sortable="false" />
-	
+	<display:column property="title" title="${titleHeader}"
+		sortable="false" />
+
 	<spring:message code="poll.ticket" var="ticketHeader" />
-	<display:column property="ticket" title="${ticketHeader}" sortable="false" />
-	
+	<display:column property="ticket" title="${ticketHeader}"
+		sortable="false" />
+
 	<spring:message code="poll.description" var="descriptionHeader" />
-	<display:column property="description" title="${descriptionHeader}" sortable="false" />
-	
-	<spring:message	code="poll.banner" var="bannerHeader" />
-			<display:column title="${bannerHeader}" >
-				<img src="<jstl:out value="${row.banner}" />">
-			</display:column>
+	<display:column property="description" title="${descriptionHeader}"
+		sortable="false" />
+
+	<spring:message code="poll.banner" var="bannerHeader" />
+	<display:column title="${bannerHeader}">
+		<img src="<jstl:out value="${row.banner}" />">
+	</display:column>
 
 	<spring:message code="poll.timeActive" var="timeActiveHeader" />
-	<display:column property="timeActive" title="${timeActiveHeader}" sortable="false"  />
-	
+	<display:column property="timeActive" title="${timeActiveHeader}"
+		sortable="false" />
+
 	<display:column>
-			<a href="question/list.do?pollId=${row.id}">
-				<spring:message	code="poll.questions" />
-			</a>
-	</display:column>
-	
-	<display:column>
-			<a href="instance/list.do?pollId=${row.id}">
-				<spring:message	code="poll.instances" />
-			</a>
-	</display:column>
-	
-	<display:column>
-			<a href="poller/view.do?pollId=${row.id}">
-				<spring:message	code="poll.poller" />
-			</a>
+		<a href="question/list.do?pollId=${row.id}"> <spring:message
+				code="poll.questions" />
+		</a>
 	</display:column>
 
+	<display:column>
+		<a href="instance/list.do?pollId=${row.id}"> <spring:message
+				code="poll.instances" />
+		</a>
+	</display:column>
 
+	<display:column>
+		<a href="poller/view.do?pollId=${row.id}"> <spring:message
+				code="poll.poller" />
+		</a>
+	</display:column>
+
+	<security:authorize access="hasRole('ADMIN')">
+	<jstl:if test="${bannedPollers.contains(row) }">
+		<display:column>
+			<a href="poller/administrator/readmit.do?q=${row.id}"> <spring:message
+					code="poller.readmit" />
+			</a>
+		</display:column>
+	</jstl:if>
+
+	<jstl:if test="${!bannedPollers.contains(row) }">
+		<display:column>
+			<a href="poller/administrator/banned.do?q=${row.id}"> <spring:message
+					code="poller.banned" />
+			</a>
+		</display:column>
+	</jstl:if>
+	</security:authorize>
 </display:table>
 
 

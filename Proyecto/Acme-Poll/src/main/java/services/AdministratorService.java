@@ -10,8 +10,10 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import domain.Administrator;
 import repositories.AdministratorRepository;
+import security.UserAccount;
+import domain.Administrator;
+import domain.Poller;
 
 @Service
 @Transactional
@@ -21,6 +23,8 @@ public class AdministratorService {
 
 	@Autowired
 	private AdministratorRepository administratorRepository;
+	@Autowired 
+	private PollerService pollerService;
 
 
 	//Constructor
@@ -68,6 +72,28 @@ public class AdministratorService {
 	public Administrator findActorByUsername(final Integer id) {
 		Assert.notNull(id);
 		return this.administratorRepository.findOneUserAccount(id);
+	}
+	
+	public Poller bannedPoller(final Poller poller) {
+		Assert.notNull(poller);
+		Assert.isTrue(this.pollerService.exists(poller.getId()));
+
+		final UserAccount account = poller.getUserAccount();
+		account.setBanned(true);
+		poller.setUserAccount(account);
+
+		return this.pollerService.save(poller);
+	}
+
+	public Poller readmitPoller(final Poller poller) {
+		Assert.notNull(poller);
+		Assert.isTrue(this.pollerService.exists(poller.getId()));
+
+		final UserAccount account = poller.getUserAccount();
+		account.setBanned(false);
+		poller.setUserAccount(account);
+
+		return this.pollerService.save(poller);
 	}
 
 }
