@@ -50,5 +50,13 @@ public class PollService {
 		return this.pollRepository.findPollActivated(now);
 
 	}
+	public List<Integer> findMinAvgStdMaxPollsByPoller(){
+		
+		return this.pollRepository.findMinAvgStdMaxPollsByPoller();
+		
+	}
+	public List<Integer> findMinAvgStdMaxInstancesByPoll(){
+		return this.pollRepository.findMinAvgStdMaxInstancesByPoll();
+	}
 
 }

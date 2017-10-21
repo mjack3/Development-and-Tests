@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Administrator;
 import services.AdministratorService;
+import services.PollService;
+import domain.Administrator;
 
 @RequestMapping("/administrator")
 @Controller
@@ -20,6 +21,8 @@ public class AdministratorController {
 
 	@Autowired
 	private AdministratorService administratorService;
+	@Autowired
+	private PollService pollService;
 
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -51,6 +54,24 @@ public class AdministratorController {
 			}
 		return result;
 	}
+	
+	
+	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
+	public ModelAndView list() {
+
+		ModelAndView result;
+		result = new ModelAndView("administrator/dashboard");
+		
+		
+		
+
+		result.addObject("findMinAvgStdMaxPollsByPoller",pollService.findMinAvgStdMaxPollsByPoller()
+				);
+		result.addObject("findMinAvgStdMaxInstancesByPoll",
+				pollService.findMinAvgStdMaxInstancesByPoll());
+		return result;
+
+	}
 
 	protected ModelAndView createEditModelAndView(final Administrator admin) {
 
@@ -71,5 +92,7 @@ public class AdministratorController {
 
 		return result;
 	}
+	
+	
 
 }
