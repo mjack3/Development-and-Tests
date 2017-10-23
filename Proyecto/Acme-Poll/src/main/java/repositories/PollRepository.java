@@ -17,9 +17,11 @@ public interface PollRepository extends JpaRepository<Poll, Integer> {
 	List<Poll> findPollActivated(Date today);
 	@Query("select min(p.polls.size),avg(p.polls.size), stddev(p.polls.size),max(p.polls.size) from Poller p")
 	List<Integer> findMinAvgStdMaxPollsByPoller();
-	
+
 	@Query("select min(p.instances.size),avg(p.instances.size), stddev(p.instances.size),max(p.instances.size) from Poll p")
 	List<Integer> findMinAvgStdMaxInstancesByPoll();
-	
 
+	//The minimum, the average, the standard deviation, and the maximum num-ber of questions per poll.
+	@Query("select min(p.questions.size),avg(p.questions.size), stddev(p.questions.size),max(p.questions.size) from Poll p")
+	List<Integer> findMinAvgStdMaxQuestionByPoll();
 }
