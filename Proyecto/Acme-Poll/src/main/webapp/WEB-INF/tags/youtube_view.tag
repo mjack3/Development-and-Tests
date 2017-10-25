@@ -10,8 +10,6 @@
 <%@tag import="java.util.Date"%>
 <%@tag import="java.util.Map"%>
 <%@tag import="java.util.HashMap"%>
-<%@tag import="java.lang.reflect.Field"%>
-<%@tag import="domain.DomainEntity"%>
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@tag language="java" body-content="scriptless" %>
