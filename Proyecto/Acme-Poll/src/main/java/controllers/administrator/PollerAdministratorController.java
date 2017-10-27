@@ -8,7 +8,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.AdministratorService;
 import services.PollerService;
-import domain.Poller;
 
 @RequestMapping("/poller/administrator")
 @Controller
@@ -27,14 +26,14 @@ public class PollerAdministratorController {
 
 		res = new ModelAndView("poller/list");
 		
-		res.addObject("poll", pollerService.findAll());
+		res.addObject("poller", pollerService.findAll());
 		res.addObject("bannedPollers", pollerService.pollersBanned());
 
 		return res;
 	}
 	
 	@RequestMapping("/banned")
-	public ModelAndView banned(@RequestParam Poller q) {
+	public ModelAndView banned(@RequestParam int q) {
 		
 		try {
 			administratorService.bannedPoller(q);
@@ -46,7 +45,7 @@ public class PollerAdministratorController {
 	}
 	
 	@RequestMapping("/readmit")
-	public ModelAndView readmit(@RequestParam Poller q) {
+	public ModelAndView readmit(@RequestParam int q) {
 		
 		try {
 			administratorService.readmitPoller(q);

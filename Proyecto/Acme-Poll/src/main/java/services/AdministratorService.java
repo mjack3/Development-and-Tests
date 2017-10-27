@@ -74,10 +74,10 @@ public class AdministratorService {
 		return this.administratorRepository.findOneUserAccount(id);
 	}
 	
-	public Poller bannedPoller(final Poller poller) {
-		Assert.notNull(poller);
-		Assert.isTrue(this.pollerService.exists(poller.getId()));
-
+	public Poller bannedPoller(final int pollerId) {
+		Assert.notNull(pollerId);
+		Assert.isTrue(this.pollerService.exists(pollerId));
+		Poller poller = pollerService.findOne(pollerId);
 		final UserAccount account = poller.getUserAccount();
 		account.setBanned(true);
 		poller.setUserAccount(account);
@@ -85,10 +85,10 @@ public class AdministratorService {
 		return this.pollerService.save(poller);
 	}
 
-	public Poller readmitPoller(final Poller poller) {
-		Assert.notNull(poller);
-		Assert.isTrue(this.pollerService.exists(poller.getId()));
-
+	public Poller readmitPoller(final int pollerId) {
+		Assert.notNull(pollerId);
+		Assert.isTrue(this.pollerService.exists(pollerId));
+		Poller poller = pollerService.findOne(pollerId);
 		final UserAccount account = poller.getUserAccount();
 		account.setBanned(false);
 		poller.setUserAccount(account);

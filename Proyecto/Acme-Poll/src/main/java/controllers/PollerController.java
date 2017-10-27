@@ -43,7 +43,7 @@ public class PollerController extends AbstractController {
 		result = new ModelAndView("poller/view");
 
 		final Poller p = this.pollerService.findPollerFromPoll(pollId);
-
+		
 		result.addObject("poller", p);
 
 		System.out.println(p);

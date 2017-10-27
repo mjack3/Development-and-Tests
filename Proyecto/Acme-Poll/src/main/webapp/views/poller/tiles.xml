@@ -26,5 +26,9 @@
 		<put-attribute name="title" value="Poller" />
 		<put-attribute name="body" value="/views/poller/view.jsp" />
 	</definition>
+	<definition name="poller/list" extends="master.page">	
+		<put-attribute name="title" value="Pollers list" />
+		<put-attribute name="body" value="/views/poller/list.jsp" />
+	</definition>
 
 </tiles-definitions>

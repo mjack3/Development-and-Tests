@@ -66,23 +66,7 @@
 		</a>
 	</display:column>
 
-	<security:authorize access="hasRole('ADMIN')">
-	<jstl:if test="${bannedPollers.contains(row) }">
-		<display:column>
-			<a href="poller/administrator/readmit.do?q=${row.id}"> <spring:message
-					code="poller.readmit" />
-			</a>
-		</display:column>
-	</jstl:if>
-
-	<jstl:if test="${!bannedPollers.contains(row) }">
-		<display:column>
-			<a href="poller/administrator/banned.do?q=${row.id}"> <spring:message
-					code="poller.banned" />
-			</a>
-		</display:column>
-	</jstl:if>
-	</security:authorize>
+	
 </display:table>
 
 

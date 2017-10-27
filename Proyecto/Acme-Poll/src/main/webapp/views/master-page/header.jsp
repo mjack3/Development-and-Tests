@@ -53,6 +53,9 @@
 					
 						<security:authorize access="hasRole('ADMINISTRATOR')">
 								<li><a href="administrator/edit.do?userAccountID=${id}"><spring:message code="master.page.administrator.edit" /></a></li>
+								<li><a href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
+								<li><a href="poller/administrator/list.do"><spring:message code="master.page.administrator.poller" /></a></li>
+						
 						</security:authorize>
 						
 						<security:authorize access="hasRole('POLLER')">

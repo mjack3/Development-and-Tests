@@ -10,8 +10,8 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import domain.Poller;
 import repositories.PollerRepository;
+import domain.Poller;
 
 @Service
 @Transactional
@@ -81,6 +81,13 @@ public class PollerService {
 	public List<Poller> pollersBanned() {
 		// TODO Auto-generated method stub
 		return this.pollerRepository.pollersBanned();
+	}
+
+	public Boolean isBanned(int pollerId) {
+		Assert.isTrue(pollerId!=0);
+		Poller poller = this.findOne(pollerId);
+		return this.pollersBanned().contains(poller);
+		
 	}
 
 }

@@ -12,27 +12,24 @@
 
 
 
- <tr>
-	<td> <b><spring:message code="poller.name" var="nameHeader"/></b>  </td>
-	<jstl:out value="${nameHeader}"/><jstl:out value="${poller.name}"/>
-<td>
-
- <tr>
-	<td> <b><spring:message code="poller.surname"/></b> <jstl:out value="${poller.surname}"/> </td>
-<td>
-
- <tr>
-	<td> <b><spring:message code="poller.email"/></b> <jstl:out value="${poller.email}"/> </td>
-<td>
-
- <tr>
-	<td> <b><spring:message code="poller.phone"/></b> <jstl:out value="${poller.phone}"/> </td>
-<td>
-
- <tr>
-	<td> <b><spring:message code="poller.address"/></b> <jstl:out value="${poller.address}"/> </td>
-<td>
-
-
-
-<br/>
+<tr>
+	<td><b><spring:message code="poller.name" var="nameHeader" /></b>
+	</td>
+	<jstl:out value="${nameHeader}" />
+	<jstl:out value="${poller.name}" />
+	<td>
+<tr>
+	<td><b><spring:message code="poller.surname" /></b> <jstl:out
+			value="${poller.surname}" /></td>
+	<td>
+<tr>
+	<td><b><spring:message code="poller.email" /></b> <jstl:out
+			value="${poller.email}" /></td>
+	<td>
+<tr>
+	<td><b><spring:message code="poller.phone" /></b> <jstl:out
+			value="${poller.phone}" /></td>
+	<td>
+<tr>
+	<td><b><spring:message code="poller.address" /></b> <jstl:out
+			value="${poller.address}" /></td>

@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import domain.Poll;
 import repositories.PollRepository;
+import domain.Poll;
 
 @Service
 @Transactional
@@ -50,13 +50,20 @@ public class PollService {
 		return this.pollRepository.findPollActivated(now);
 
 	}
-	public List<Integer> findMinAvgStdMaxPollsByPoller(){
-		
-		return this.pollRepository.findMinAvgStdMaxPollsByPoller();
+	public String findMinAvgStdMaxPollsByPoller(){
+		String res = "Min: " + pollRepository.findMinAvgStdMaxPollsByPoller()[0] 
+				+ ", Avg: " +  pollRepository.findMinAvgStdMaxPollsByPoller()[1]
+						+ ", Std: " +  pollRepository.findMinAvgStdMaxPollsByPoller()[2]
+								+ ", Max: " +  pollRepository.findMinAvgStdMaxPollsByPoller()[3];
+		return res;
 		
 	}
-	public List<Integer> findMinAvgStdMaxInstancesByPoll(){
-		return this.pollRepository.findMinAvgStdMaxInstancesByPoll();
+	public String findMinAvgStdMaxInstancesByPoll(){
+		String res = "Min: " + pollRepository.findMinAvgStdMaxInstancesByPoll()[0] 
+				+ ", Avg: " +  pollRepository.findMinAvgStdMaxInstancesByPoll()[1]
+						+ ", Std: " +  pollRepository.findMinAvgStdMaxInstancesByPoll()[2]
+								+ ", Max: " +  pollRepository.findMinAvgStdMaxInstancesByPoll()[3];
+		return res;
 	}
 
 }
