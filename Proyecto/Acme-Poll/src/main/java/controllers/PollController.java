@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Poll;
 import services.PollService;
+import domain.Poll;
 
 @Controller
 @RequestMapping("/poll")
 public class PollController extends AbstractController {
 
 	@Autowired
-	private PollService pollService;
+	private PollService	pollService;
 
 
 	public PollController() {
@@ -34,7 +34,7 @@ public class PollController extends AbstractController {
 		result.addObject("requestURI", "poll/list.do");
 		final List<Poll> catalogue = this.pollService.findPollActivated();
 		result.addObject("poll", catalogue);
-		result.addObject("timeActive", now);
+		result.addObject("today", now);
 		return result;
 	}
 

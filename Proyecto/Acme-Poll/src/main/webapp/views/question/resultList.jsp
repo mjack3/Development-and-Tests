@@ -22,12 +22,12 @@
 
 
 
-<display:table pagesize="5" keepStatus="true" name="poll"
+<display:table pagesize="5" keepStatus="true" name="question"
 	requestURI="${requestURI}" id="row" class="table table-over">
 
 	<!-- Attributes -->
 
-	<spring:message code="poll.title" var="titleHeader" />
+	<spring:message code="question.title" var="titleHeader" />
 	<display:column property="title" title="${titleHeader}"
 		sortable="false" />
 

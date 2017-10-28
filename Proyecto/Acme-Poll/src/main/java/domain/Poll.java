@@ -38,7 +38,8 @@ public class Poll extends DomainEntity {
 	private String	ticket;
 	private String	description;
 	private String	banner;
-	private Date	timeActive;
+	private Date	startDate;
+	private Date	endDate;
 
 
 	@NotBlank
@@ -81,12 +82,22 @@ public class Poll extends DomainEntity {
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-	public Date getTimeActive() {
-		return this.timeActive;
+	public Date getStartDate() {
+		return this.startDate;
 	}
 
-	public void setTimeActive(final Date timeActive) {
-		this.timeActive = timeActive;
+	public void setStartDate(final Date startDate) {
+		this.startDate = startDate;
+	}
+
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	public Date getEndDate() {
+		return this.endDate;
+	}
+
+	public void setEndDate(final Date endDate) {
+		this.endDate = endDate;
 	}
 
 

@@ -13,9 +13,9 @@ import domain.Poll;
 @Repository
 public interface PollRepository extends JpaRepository<Poll, Integer> {
 
-	@Query("select p from Poll p where timeActive >= ?1")
+	@Query("select p from Poll p where startDate >= ?1")
 	List<Poll> findPollActivated(Date today);
-	
+
 	@Query("select min(p.polls.size),avg(p.polls.size), stddev(p.polls.size),max(p.polls.size) from Poller p")
 	Double[] findMinAvgStdMaxPollsByPoller();
 

@@ -156,7 +156,8 @@
  		<property name="ticket" value="aa-11111" />
  		<property name="description" value="descriptionPoll1" />
  		<property name="banner" value="https://lihembensayel.files.wordpress.com/2013/09/imagen1.jpg?w=833" />
- 		<property name="timeActive" value="11/08/1992" />
+ 		<property name="startDate" value="11/08/2017" />
+ 		<property name="endDate" value="15/08/2017" />
  		<property name="poller" ref="poller1"/>
  	</bean>
  	
@@ -165,7 +166,8 @@
  		<property name="ticket" value="aa-22222" />
  		<property name="description" value="descriptionPoll2" />
  		<property name="banner" value="https://lihembensayel.files.wordpress.com/2013/09/imagen1.jpg?w=833" />
- 		<property name="timeActive" value="11/08/1993" />
+ 		<property name="startDate" value="11/08/2017" />
+ 		<property name="endDate" value="15/11/2017" />
  		<property name="poller" ref="poller1"/>
  	</bean>
  	
@@ -174,7 +176,8 @@
  		<property name="ticket" value="aa-33333" />
  		<property name="description" value="descriptionPoll3" />
  		<property name="banner" value="https://lihembensayel.files.wordpress.com/2013/09/imagen1.jpg?w=833" />
- 		<property name="timeActive" value="17/10/2018" />
+ 		<property name="startDate" value="20/12/2017" />
+ 		<property name="endDate" value="26/12/2017" />
  		<property name="poller" ref="poller1"/>
  	</bean>
  	
@@ -183,7 +186,8 @@
  		<property name="ticket" value="bb-11111" />
  		<property name="description" value="Poll sin respuestas" />
  		<property name="banner" value="https://lihembensayel.files.wordpress.com/2013/09/imagen1.jpg?w=833" />
- 		<property name="timeActive" value="17/10/2018" />
+ 		<property name="startDate" value="25/01/2018" />
+ 		<property name="endDate" value="15/02/2018" />
  		<property name="poller" ref="poller2"/>
  	</bean>
  	
