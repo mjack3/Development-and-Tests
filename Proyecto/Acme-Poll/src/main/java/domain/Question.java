@@ -2,15 +2,13 @@
 package domain;
 
 import java.util.Collection;
-import java.util.HashSet;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -21,25 +19,10 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Question extends DomainEntity {
 
 	public Question() {
-		super();
-
-		this.answers = new HashSet<String>();	//	the possibles answer must be differents
 	}
 
-
-	private int					number;
 	private String				statment;
-	private Collection<String>	answers;
-
-
-	@Min(0)
-	public int getNumber() {
-		return this.number;
-	}
-
-	public void setNumber(final int number) {
-		this.number = number;
-	}
+	private Collection<Choice>	choices;
 
 	@NotBlank
 	public String getStatment() {
@@ -50,23 +33,20 @@ public class Question extends DomainEntity {
 		this.statment = statment;
 	}
 
+	@NotNull
 	@NotEmpty
-	@ElementCollection
-	public Collection<String> getAnswers() {
-		return this.answers;
-	}
-	public void setAnswers(final Collection<String> answers) {
-		this.answers = answers;
-	}
-	public void addAnswer(final String answer) {
-		this.answers.add(answer);
+	@OneToMany
+	public Collection<Choice> getChoices() {
+		return choices;
 	}
 
-	public void removeAnswer(final String answer) {
-		this.answers.remove(answer);
+	public void setChoices(Collection<Choice> choices) {
+		this.choices = choices;
 	}
 
 	// Relathionships	--------
+
+	private Poll	poll;
 
 	@NotNull
 	@Valid
@@ -80,6 +60,6 @@ public class Question extends DomainEntity {
 	}
 
 
-	private Poll	poll;
+
 
 }

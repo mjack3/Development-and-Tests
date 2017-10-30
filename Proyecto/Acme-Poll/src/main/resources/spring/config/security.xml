@@ -65,6 +65,10 @@
 		<security:intercept-url pattern="/poller/edit.do" access="hasRole('POLLER')" />
 		<security:intercept-url pattern="/poller/save-poller.do" access="hasRole('POLLER')" />
 		
+		
+		<security:intercept-url pattern="/poll/poller/**" access="hasRole('POLLER')" />
+		<security:intercept-url pattern="/hint/poller/**" access="hasRole('POLLER')" />
+		
 		<!-- Fin Reme -->
 
 		<security:intercept-url pattern="/**"

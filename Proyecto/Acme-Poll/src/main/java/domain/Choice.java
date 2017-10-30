@@ -1,28 +1,29 @@
-
 package domain;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
-@Table(name = "`choice`")
-public class Choice extends DomainEntity {
+public class Choice extends DomainEntity{
 
-	private String	text;
-
+	private String text;
+	
+	public Choice() {
+		super();
+	}
 
 	@NotBlank
 	public String getText() {
-		return this.text;
+		return text;
 	}
 
-	public void setText(final String text) {
+	public void setText(String text) {
 		this.text = text;
 	}
-
+	
+	
 }

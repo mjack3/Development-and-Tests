@@ -66,4 +66,18 @@ public class PollService {
 		return res;
 	}
 
+	public void delete(Poll arg0) {
+		Assert.notNull(arg0);
+		Assert.isTrue(pollRepository.exists(arg0.getId()));
+		pollRepository.delete(arg0);
+	}
+
+	public Poll update(Poll arg0) {
+		Assert.notNull(arg0);
+		Assert.isTrue(pollRepository.exists(arg0.getId()));
+		return pollRepository.save(arg0);
+	}
+	
+	
+
 }

@@ -46,6 +46,7 @@ public class AdministratorService {
 			a.setPhone(administrator.getPhone());
 			a.setSurname(administrator.getSurname());
 			a.setAddress(administrator.getAddress());
+			a.setChirps(administrator.getChirps());
 			a = this.administratorRepository.save(a);
 		} else {
 			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();

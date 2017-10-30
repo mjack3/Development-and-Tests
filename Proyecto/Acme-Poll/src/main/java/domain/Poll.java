@@ -3,7 +3,6 @@ package domain;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashSet;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -28,9 +27,6 @@ public class Poll extends DomainEntity {
 
 	public Poll() {
 		super();
-
-		this.questions = new HashSet<Question>();	// Min initialization + Question must be different
-		this.instances = new HashSet<Instance>();		// Min initialization 
 	}
 
 
@@ -61,7 +57,7 @@ public class Poll extends DomainEntity {
 		this.ticket = ticket;
 	}
 
-	@NotNull
+	@NotBlank
 	public String getDescription() {
 		return this.description;
 	}
@@ -79,25 +75,29 @@ public class Poll extends DomainEntity {
 	public void setBanner(final String banner) {
 		this.banner = banner;
 	}
+	
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	public Date getEndDate() {
+		return endDate;
+	}
 
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
+	}
+
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	public Date getStartDate() {
 		return this.startDate;
 	}
 
+
 	public void setStartDate(final Date startDate) {
 		this.startDate = startDate;
-	}
 
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
-	public Date getEndDate() {
-		return this.endDate;
-	}
-
-	public void setEndDate(final Date endDate) {
-		this.endDate = endDate;
 	}
 
 
@@ -106,6 +106,7 @@ public class Poll extends DomainEntity {
 	private Collection<Question>	questions;
 	private Collection<Instance>	instances;
 	private Poller					poller;
+	private Collection<Hint>	    hints;
 
 
 	@NotNull
@@ -116,14 +117,6 @@ public class Poll extends DomainEntity {
 
 	public void setQuestions(final Collection<Question> questions) {
 		this.questions = questions;
-	}
-	public void addQuestion(final Question question) {
-		this.questions.add(question);
-		question.setPoll(this);
-	}
-	public void removeQuestion(final Question question) {
-		this.questions.remove(question);
-		question.setPoll(this);
 	}
 
 	@NotNull
@@ -146,5 +139,17 @@ public class Poll extends DomainEntity {
 	public void setPoller(final Poller poller) {
 		this.poller = poller;
 	}
+
+	@NotNull
+	@OneToMany
+	public Collection<Hint> getHints() {
+		return hints;
+	}
+
+	public void setHints(Collection<Hint> hints) {
+		this.hints = hints;
+	}
+	
+	
 
 }

@@ -15,8 +15,9 @@ public interface PollerRepository extends JpaRepository<Poller, Integer> {
 	@Query("select p from Poller p where p.userAccount.id = ?1")
 	Poller findOneUserAccount(int id);
 
-	@Query("select p from Poll po join po.poller p where p.id = ?1")
+	@Query("select p.poller from Poll p where p.id = ?1")
 	Poller findPollerFromPoll(int id);
+	
 	@Query("select u from Poller u where u.userAccount.banned = true")
 	List<Poller> pollersBanned();
 

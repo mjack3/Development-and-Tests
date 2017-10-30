@@ -24,6 +24,10 @@
 		<bean class="converters.PollToStringConverter" />
 		<bean class="converters.AdministratorToStringConverter" />
 		<bean class="converters.PollerToStringConverter" />
+		<bean class="converters.AnswerToStringConverter" />
+		<bean class="converters.ChirpToStringConverter" />
+		<bean class="converters.ChoiceToStringConverter" />
+		<bean class="converters.HintToStringConverter" />
 		
 
 		<bean class="converters.StringToUserAccountConverter" />
@@ -31,6 +35,10 @@
 		<bean class="converters.StringToAuthorityConverter" />
 		<bean class="converters.StringToAdministratorConverter" />
 		<bean class="converters.StringToPollerConverter" />
+		<bean class="converters.StringToAnswerConverter" />
+		<bean class="converters.StringToChirpConverter" />
+		<bean class="converters.StringToChoiceConverter" />
+		<bean class="converters.StringToHintConverter" />
 		
 		
 		

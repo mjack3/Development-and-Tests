@@ -13,5 +13,4 @@ public class Administrator extends Actor {
 		super();
 	}
 
-	// Relathionships	--------
 }

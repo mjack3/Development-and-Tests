@@ -6,12 +6,13 @@ import java.util.HashSet;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -24,10 +25,11 @@ public class Instance extends DomainEntity {
 
 
 	private String	name;
-	private Gender	gender;
+	private String	gender;
 	private String	city;
 
 
+	@NotBlank
 	public String getName() {
 		return this.name;
 	}
@@ -37,14 +39,16 @@ public class Instance extends DomainEntity {
 	}
 
 	@NotNull
-	public Gender getGender() {
+	@Valid
+	public String getGender() {
 		return this.gender;
 	}
 
-	public void setGender(final Gender gender) {
+	public void setGender(final String gender) {
 		this.gender = gender;
 	}
 
+	@NotBlank
 	public String getCity() {
 		return this.city;
 	}
@@ -55,19 +59,9 @@ public class Instance extends DomainEntity {
 
 
 	//	Relathipnships	-----------
-	private Actor				actor;
 	private Poll				poll;
 	private Collection<Answer>	answers;
 
-
-	@ManyToOne
-	public Actor getActor() {
-		return this.actor;
-	}
-
-	public void setActor(final Actor actor) {
-		this.actor = actor;
-	}
 
 	@Valid
 	@NotNull
@@ -81,7 +75,7 @@ public class Instance extends DomainEntity {
 	}
 
 	@NotNull
-	@OneToMany(mappedBy = "instance", cascade = CascadeType.ALL)
+	@OneToMany()
 	public Collection<Answer> getAnswers() {
 		return this.answers;
 	}
@@ -90,13 +84,5 @@ public class Instance extends DomainEntity {
 		this.answers = answers;
 	}
 
-	public void addAnswer(final Answer answer) {
-		this.answers.add(answer);
-		answer.setInstance(this);
-	}
-	public void removeAnswer(final Answer answer) {
-		this.answers.remove(answer);
-		answer.setInstance(this);
-	}
 
 }

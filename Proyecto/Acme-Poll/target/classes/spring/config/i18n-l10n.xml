@@ -27,7 +27,14 @@
 		<value>/views/legislation/messages</value>
 		
 	
+		<value>/views/poll/messages</value>
+		<value>/views/administrator/messages</value>
+		<value>/views/poller/messages</value>
 		
+		<value>/views/answer/messages</value>
+		<value>/views/chirp/messages</value>
+		<value>/views/choice/messages</value>
+		<value>/views/hint/messages</value>
 		
 		
 	</util:list>

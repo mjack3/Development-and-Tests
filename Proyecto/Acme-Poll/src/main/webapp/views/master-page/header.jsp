@@ -60,6 +60,7 @@
 						
 						<security:authorize access="hasRole('POLLER')">
 								<li><a href="poller/edit.do?userAccountID=${id}"><spring:message code="master.page.poller.edit" /></a></li>
+								<li><a href="poll/poller/list.do"><spring:message code="master.page.poller.poll.list" /></a></li>
 						</security:authorize>
 					
 				</ul>

@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Access(AccessType.PROPERTY)
 public class Poller extends Actor {
-
+	
 	public Poller() {
 		super();
 		this.polls = new HashSet<Poll>();
@@ -21,6 +21,9 @@ public class Poller extends Actor {
 
 	//	RelationShips	----------
 
+
+	private Collection<Poll>	polls;
+	
 	@NotNull
 	@OneToMany(mappedBy = "poller")
 	public Collection<Poll> getPolls() {
@@ -31,6 +34,4 @@ public class Poller extends Actor {
 		this.polls = polls;
 	}
 
-
-	private Collection<Poll>	polls;
 }

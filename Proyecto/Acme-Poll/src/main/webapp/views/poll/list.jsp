@@ -20,7 +20,12 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<input type="text" id="textSearch" />
+<button type="button" class="btn btn-primary">
+	<spring:message code="poll.search" />
+</button>
 
+<br/>
 
 <display:table pagesize="5" keepStatus="true" name="poll"
 	requestURI="${requestURI}" id="row" class="table table-over">
@@ -41,23 +46,17 @@
 
 	<spring:message code="poll.banner" var="bannerHeader" />
 	<display:column title="${bannerHeader}">
-		<img src="<jstl:out value="${row.banner}" />">
+		<a href="${row.banner}">Banner</a>
+
 	</display:column>
 
 	<spring:message code="poll.startDate" var="startDateHeader" />
 	<display:column property="startDate" title="${startDateHeader}"
 		sortable="false" />
-	
+
 	<spring:message code="poll.endDate" var="endDateHeader" />
 	<display:column property="endDate" title="${endDateHeader}"
 		sortable="false" />
-
-	<jstl:if test="${today.before(row.startDate)}">
-		<display:column>
-			<a href="question/resultList.do?pollId=${row.id}"></a>
-			<spring:message code="poll.result" />
-		</display:column>
-	</jstl:if>
 
 
 	<display:column>
@@ -65,16 +64,22 @@
 				code="poll.questions" />
 		</a>
 	</display:column>
-
-	<display:column>
-		<a href="instance/list.do?pollId=${row.id}"> <spring:message
-				code="poll.instances" />
-		</a>
-	</display:column>
-
+	
 	<display:column>
 		<a href="poller/view.do?pollId=${row.id}"> <spring:message
 				code="poll.poller" />
+		</a>
+	</display:column>
+	
+	<display:column>
+		<a href="hint/poller/list.do?q=${row.id}"> <spring:message
+				code="poll.hints" />
+		</a>
+	</display:column>
+	
+	<display:column>
+		<a href="poll/poller/remove.do?q=${row.id}"> <spring:message
+				code="acme.delete" />
 		</a>
 	</display:column>
 
@@ -84,7 +89,33 @@
 
 
 
-
+<script>
+	$(document).ready(function() {
+		$("button").click(function() {
+			$.ajax({
+				success : function(result) {
+					var input, filter, table, tr, tdTitle, tdDescription,tdTicker, i;
+					input = document.getElementById("textSearch");
+					filter = input.value.toUpperCase();
+					table = document.getElementById("row");
+					tr = table.getElementsByTagName("tr");
+					for (i = 0; i < tr.length; i++) {
+						tdTitle = tr[i].getElementsByTagName("td")[0];
+						tdTicker = tr[i].getElementsByTagName("td")[1];
+						tdDescription = tr[i].getElementsByTagName("td")[2];
+						if (tdTitle || tdDescription || tdTicker) {
+							if (tdTitle.innerHTML.toUpperCase().indexOf(filter) > -1 || tdDescription.innerHTML.toUpperCase().indexOf(filter) > -1 || tdTicker.innerHTML.toUpperCase().indexOf(filter) > -1) {
+								tr[i].style.display = "";
+							} else {
+								tr[i].style.display = "none";
+							}
+						}
+					}
+				}
+			});
+		});
+	});
+</script>
 
 
 

@@ -1,8 +1,7 @@
 
 package domain;
 
-import java.util.Collection;
-import java.util.HashSet;
+import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
@@ -32,8 +31,6 @@ public abstract class Actor extends DomainEntity {
 
 	public Actor() {
 		super();
-
-		this.instances = new HashSet<Instance>();	// Instances is updated automatically
 	}
 
 	@NotBlank
@@ -71,6 +68,7 @@ public abstract class Actor extends DomainEntity {
 		this.phone = phone;
 	}
 
+	@NotNull
 	public String getAddress() {
 		return this.address;
 	}
@@ -82,8 +80,8 @@ public abstract class Actor extends DomainEntity {
 
 	//RelationShips	------------------------
 
-	private Collection<Instance>	instances;
 	private UserAccount				userAccount;
+	private List<Chirp>				chirps;
 
 
 	@NotNull
@@ -98,12 +96,14 @@ public abstract class Actor extends DomainEntity {
 	}
 
 	@NotNull
-	@OneToMany(mappedBy = "actor")
-	public Collection<Instance> getInstances() {
-		return this.instances;
+	@OneToMany
+	public List<Chirp> getChirps() {
+		return chirps;
 	}
 
-	public void setInstances(final Collection<Instance> instances) {
-		this.instances = instances;
+	public void setChirps(List<Chirp> chirps) {
+		this.chirps = chirps;
 	}
+	
+	
 }
