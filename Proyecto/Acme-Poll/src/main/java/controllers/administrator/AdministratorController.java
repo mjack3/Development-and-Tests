@@ -62,13 +62,13 @@ public class AdministratorController {
 		ModelAndView result;
 		result = new ModelAndView("administrator/dashboard");
 		
-		
-		
-
 		result.addObject("findMinAvgStdMaxPollsByPoller",pollService.findMinAvgStdMaxPollsByPoller()
 				);
 		result.addObject("findMinAvgStdMaxInstancesByPoll",
 				pollService.findMinAvgStdMaxInstancesByPoll());
+		
+		result.addObject("findMinAvgStdMaxQuestionByPoll", pollService.findMinAvgStdMaxQuestionByPoll());
+		
 		return result;
 
 	}

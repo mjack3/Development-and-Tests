@@ -42,7 +42,7 @@ public class PollerService {
 
 	//CRUD Methods
 
-	public Poller save(final Poller poller) {
+	public Poller save(Poller poller) {
 		Assert.notNull(poller);
 		Poller p = null;
 
@@ -56,7 +56,7 @@ public class PollerService {
 			p.setPolls(poller.getPolls());
 			p = this.pollerRepository.save(p);
 		} else {
-			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+			Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 			poller.getUserAccount().setPassword(encoder.encodePassword(poller.getUserAccount().getPassword(), null));
 			p = this.pollerRepository.save(poller);
 		}

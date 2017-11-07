@@ -35,6 +35,7 @@
 		<value>/views/chirp/messages</value>
 		<value>/views/choice/messages</value>
 		<value>/views/hint/messages</value>
+		<value>/views/question/messages</value>
 		
 		
 	</util:list>

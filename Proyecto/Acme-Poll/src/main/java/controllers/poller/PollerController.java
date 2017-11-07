@@ -66,11 +66,13 @@ public class PollerController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/save-poller", method = RequestMethod.POST, params = "save")
-	public ModelAndView savePoller(@Valid final Poller poller, final BindingResult binding) {
+	public ModelAndView savePoller(@Valid Poller poller, BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors()) {
-			for (final ObjectError e : binding.getAllErrors())
+			for ( ObjectError e : binding.getAllErrors()) {
 				System.out.println(e.toString());
+			}
+				
 			result = this.createEditModelAndView(poller, "poller.commit.error");
 		} else
 			try {
@@ -97,8 +99,6 @@ public class PollerController extends AbstractController {
 		result = new ModelAndView("poller/edit");
 		result.addObject("poller", poller);
 		result.addObject("message", message);
-
-		System.out.println(message);
 
 		return result;
 	}

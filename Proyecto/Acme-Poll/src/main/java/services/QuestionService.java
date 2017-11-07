@@ -22,6 +22,7 @@ public class QuestionService {
 	private QuestionRepository questionRepository;
 
 
+
 	//Constructor
 
 	public QuestionService() {
@@ -32,7 +33,7 @@ public class QuestionService {
 
 	public void delete(Integer arg0) {
 		Assert.notNull(arg0);
-		Assert.isTrue(questionRepository.exists(arg0));
+		
 		questionRepository.delete(arg0);
 	}
 

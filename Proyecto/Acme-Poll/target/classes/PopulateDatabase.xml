@@ -97,7 +97,7 @@
   		<property name="name" value="adminName" />
   		<property name="surname" value="adminSurname" />
   		<property name="email" value="adminEmail@admin.es" />
-  		<property name="phone" value="" />
+  		<property name="phone" value="+34 (68) 687975536" />
   		<property name="address" value="11560" />
   		<property name="chirps" >
   			<list></list>
@@ -111,7 +111,7 @@
   		<property name="name" value="poller1Name" />
   		<property name="surname" value="poller1Surname" />
   		<property name="email" value="poller1@poller.es" />
-  		<property name="phone" value="+5654554" />
+  		<property name="phone" value="+34 (34) 5654554" />
   		<property name="address" value="11560" />
   		 <property name="chirps" >
   			<list></list>
@@ -123,7 +123,7 @@
   		<property name="name" value="poller2Name" />
   		<property name="surname" value="poller2Surname" />
   		<property name="email" value="poller2@poller.es" />
-  		<property name="phone" value="+56(213)54554" />
+  		<property name="phone" value="+56 (213) 54554" />
   		<property name="address" value="11560" />
   		<property name="chirps" >
   			<list></list>
@@ -135,7 +135,7 @@
   		<property name="name" value="poller3Name" />
   		<property name="surname" value="poller3Surname" />
   		<property name="email" value="poller3@poller.es" />
-  		<property name="phone" value="5654554" />
+  		<property name="phone" value="+56 (213) 54554" />
   		<property name="address" value="11560" />
   		<property name="chirps" >
   			<list></list>
@@ -147,7 +147,7 @@
   		<property name="name" value="poller4Name" />
   		<property name="surname" value="poller4Surname" />
   		<property name="email" value="poller4@poller.es" />
-  		<property name="phone" value="5654554" />
+  		<property name="phone" value="+56 (213) 54554" />
   		<property name="address" value="11560" />
   		<property name="chirps" >
   			<list></list>
@@ -159,7 +159,7 @@
   		<property name="name" value="poller5Name" />
   		<property name="surname" value="poller5Surname" />
   		<property name="email" value="poller5@poller.es" />
-  		<property name="phone" value="+58(99)54554" />
+  		<property name="phone" value="+58 (99) 54554" />
   		<property name="address" value="11560" />
   		<property name="chirps" >
   			<list></list>
@@ -206,10 +206,11 @@
  		<property name="statment" value="¿Te gustan las ensaladas?"/>
  		<property name="choices">
  			<list>
- 				<ref bean="choice111"/>
- 				<ref bean="choice112"/>
+ 				<value>Si</value>
+ 				<value>no</value>
  			</list>
  		</property>
+ 		<property name="number"  value="1"/>
  		<property name="poll" ref="poll1"/>
  	</bean>
  	
@@ -217,10 +218,11 @@
  		<property name="statment" value="¿Te gustan las pizzas?"/>
  		<property name="choices">
  			<list>
- 				<ref bean="choice121"/>
- 				<ref bean="choice122"/>
+ 				<value>Si</value>
+ 				<value>no</value>
  			</list>
  		</property>
+ 		<property name="number"  value="2"/>
  		<property name="poll" ref="poll1"/>
  	</bean>
  	
@@ -228,10 +230,11 @@
  		<property name="statment" value="¿Te gustan las hamburguesas?"/>
  		<property name="choices">
  			<list>
- 				<ref bean="choice131"/>
- 				<ref bean="choice132"/>
+ 				<value>Si</value>
+ 				<value>no</value>
  			</list>
  		</property>
+ 		<property name="number"  value="3"/>
  		<property name="poll" ref="poll1"/>
  	</bean>
  	
@@ -239,36 +242,12 @@
  		<property name="statment" value="¿Te gustan los perritos calientes?"/>
  		<property name="choices">
  			<list>
- 				<ref bean="choice141"/>
- 				<ref bean="choice142"/>
+ 				<value>Si</value>
+ 				<value>no</value>
  			</list>
  		</property>
+ 		<property name="number"  value="4"/>
  		<property name="poll" ref="poll1"/>
- 	</bean>
-
-	<bean id="choice111" class="domain.Choice">
- 		<property name="text" value="Si"/>
- 	</bean>
- 	<bean id="choice112" class="domain.Choice">
- 		<property name="text" value="No"/>
- 	</bean>
- 	<bean id="choice121" class="domain.Choice">
- 		<property name="text" value="Si"/>
- 	</bean>
- 	<bean id="choice122" class="domain.Choice">
- 		<property name="text" value="No"/>
- 	</bean>
- 	<bean id="choice131" class="domain.Choice">
- 		<property name="text" value="Si"/>
- 	</bean>
- 	<bean id="choice132" class="domain.Choice">
- 		<property name="text" value="No"/>
- 	</bean>
- 	<bean id="choice141" class="domain.Choice">
- 		<property name="text" value="Si"/>
- 	</bean>
- 	<bean id="choice142" class="domain.Choice">
- 		<property name="text" value="No"/>
  	</bean>
  	
  	<bean id="instance1" class="domain.Instance">
@@ -317,51 +296,63 @@
 	</bean>
 	
 	<bean id="answer011" class="domain.Answer">
-		<property name="choice" ref="choice112" />
+		<property name="question" value="1" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer012" class="domain.Answer">
-		<property name="choice" ref="choice122" />
+		<property name="question" value="2" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer013" class="domain.Answer">
-		<property name="choice" ref="choice132" />
+		<property name="question" value="3" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer014" class="domain.Answer">
-		<property name="choice" ref="choice141" />
+		<property name="question" value="4" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer015" class="domain.Answer">
-		<property name="choice" ref="choice141" />
+		<property name="question" value="1" />
+		<property name="selected" value="0" />
 	</bean>
 	
 	<bean id="answer016" class="domain.Answer">
-		<property name="choice" ref="choice131" />
+		<property name="question" value="2" />
+		<property name="selected" value="0" />
 	</bean>
 	
 	<bean id="answer017" class="domain.Answer">
-		<property name="choice" ref="choice122" />
+		<property name="question" value="3" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer018" class="domain.Answer">
-		<property name="choice" ref="choice112" />
+		<property name="question" value="4" />
+		<property name="selected" value="0" />
 	</bean>
 	
 	<bean id="answer019" class="domain.Answer">
-		<property name="choice" ref="choice111" />
+		<property name="question" value="1" />
+		<property name="selected" value="0" />
 	</bean>
 	
 	<bean id="answer111" class="domain.Answer">
-		<property name="choice" ref="choice121" />
+		<property name="question" value="2" />
+		<property name="selected" value="0" />
 	</bean>
 	
 	<bean id="answer112" class="domain.Answer">
-		<property name="choice" ref="choice132" />
+		<property name="question" value="3" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer113" class="domain.Answer">
-		<property name="choice" ref="choice141" />
+		<property name="question" value="4" />
+		<property name="selected" value="1" />
 	</bean>
  	
  	
@@ -398,11 +389,12 @@
  		<property name="statment" value="¿En cual de estos lugares resides?"/>
  		<property name="choices">
  			<list>
- 				<ref bean="choice211"/>
- 				<ref bean="choice212"/>
- 				<ref bean="choice213"/>
+ 				<value>Europa</value>
+ 				<value>Asia</value>
+ 				<value>America</value>
  			</list>
  		</property>
+ 		<property name="number" value="1"/>
  		<property name="poll" ref="poll2"/>
  	</bean>
  	
@@ -410,11 +402,12 @@
  		<property name="statment" value="¿Con que frecuencia ves la television?"/>
  		<property name="choices">
  			<list>
- 			 	<ref bean="choice221"/>
- 				<ref bean="choice222"/>
- 				<ref bean="choice223"/>
+ 				<value>Poca</value>
+ 				<value>Normal</value>
+ 				<value>Mucho</value>
  			</list>
  		</property>
+ 		<property name="number" value="2"/>
  		<property name="poll" ref="poll2"/>
  	</bean>
  	
@@ -422,62 +415,28 @@
  		<property name="statment" value="¿Con que frecuencia escuchas la radio?"/>
  		<property name="choices">
  			<list>
- 				<ref bean="choice321"/>
- 				<ref bean="choice322"/>
- 				<ref bean="choice323"/>
+ 				<value>Poca</value>
+ 				<value>Normal</value>
+ 				<value>Mucho</value>
  			</list>
  		</property>
  		<property name="poll" ref="poll2"/>
+ 		<property name="number" value="3"/>
  	</bean>
  	
  	<bean id="question24" class="domain.Question">
  		<property name="statment" value="¿Cuantas horas pasas al dia frente a la television o radio?"/>
  		<property name="choices">
  			<list>
- 				<ref bean="choice421"/>
- 				<ref bean="choice422"/>
- 				<ref bean="choice423"/>
+ 				<value>1-2</value>
+ 				<value>3-5</value>
+ 				<value>+5</value>
  			</list>
  		</property>
+ 		<property name="number" value="4"/>
  		<property name="poll" ref="poll2"/>
  	</bean>	
  	
- 	<bean id="choice211" class="domain.Choice">
- 		<property name="text" value="España"/>
- 	</bean>
- 	<bean id="choice212" class="domain.Choice">
- 		<property name="text" value="Portugal"/>
- 	</bean>
- 	 <bean id="choice213" class="domain.Choice">
- 		<property name="text" value="Francia"/>
- 	</bean>
- 	 	<bean id="choice221" class="domain.Choice">
- 		<property name="text" value="Mucho"/>
- 	</bean>
- 	<bean id="choice222" class="domain.Choice">
- 		<property name="text" value="Poco"/>
- 	</bean>
- 	 <bean id="choice223" class="domain.Choice">
- 		<property name="text" value="Nada"/>
- 	</bean>
-	<bean id="choice321" class="domain.Choice">
- 		<property name="text" value="Mucho"/>
- 	</bean>
- 	<bean id="choice322" class="domain.Choice">
- 		<property name="text" value="Poco"/>
- 	</bean>
- 	 <bean id="choice323" class="domain.Choice">
- 		<property name="text" value="Nada"/>
- 	</bean>
- 	<bean id="choice421" class="domain.Choice">
- 		<property name="text" value="Menos de 2"/>
- 	</bean>
- 	<bean id="choice422" class="domain.Choice">
- 		<property name="text" value="Entre 2 y 5"/>
- 	</bean>
- 	 <bean id="choice423" class="domain.Choice">
- 		<property name="text" value="Mas de 5"/>
- 	</bean>
  	
  	<bean id="instance4" class="domain.Instance">
 		<property name="name" value="anonimous" />
@@ -495,19 +454,23 @@
 	</bean>
 		
 	<bean id="answer021" class="domain.Answer">
-		<property name="choice" ref="choice211" />
+		<property name="question" value="1" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer022" class="domain.Answer">
-		<property name="choice" ref="choice221" />
+		<property name="question" value="2" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer023" class="domain.Answer">
-		<property name="choice" ref="choice321" />
+		<property name="question" value="3" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer024" class="domain.Answer">
-		<property name="choice" ref="choice421" />
+		<property name="question" value="4" />
+		<property name="selected" value="1" />
 	</bean>
 	
  	
@@ -563,10 +526,11 @@
  		<property name="statment" value="¿Te gusta el futbol?"/>
  		<property name="choices">
  			<list>
- 				<ref bean="choice311"/>
- 				<ref bean="choice312"/>
+ 				<value>Si</value>
+ 				<value>No</value>
  			</list>
  		</property>
+ 		<property name="number" value="1"/>
  		<property name="poll" ref="poll3"/>
  	</bean>
  	
@@ -574,10 +538,11 @@
  		<property name="statment" value="¿Te gusta el baloncesto"/>
  		<property name="choices">
  			<list>
- 				<ref bean="choice3f1"/>
- 				<ref bean="choice3e1"/>
+ 				<value>Si</value>
+ 				<value>No</value>
  			</list>
  		</property>
+ 		<property name="number" value="2"/>
  		<property name="poll" ref="poll3"/>
  	</bean>
 	
@@ -585,10 +550,11 @@
  		<property name="statment" value="¿Te gusta el rugby"/>
  		<property name="choices">
  			<list>
- 			 	<ref bean="choice3e2"/>
- 				<ref bean="choice332"/>
+ 				<value>Si</value>
+ 				<value>No</value>
  			</list>
  		</property>
+ 		<property name="number" value="3"/>
  		<property name="poll" ref="poll3"/>
  	</bean>
  	
@@ -596,38 +562,15 @@
  		<property name="statment" value="¿Te gusta el badminton"/>
  		<property name="choices">
  			<list>
- 			 	<ref bean="choice341"/>
- 				<ref bean="choice342"/>
+ 				<value>Si</value>
+ 				<value>No</value>
  			</list>
  		</property>
  		<property name="poll" ref="poll3"/>
+ 		<property name="number" value="4"/>
  	</bean>	
 	
  	
-	<bean id="choice311" class="domain.Choice">
- 		<property name="text" value="Si"/>
- 	</bean>
- 	<bean id="choice312" class="domain.Choice">
- 		<property name="text" value="No"/>
- 	</bean>
- 	<bean id="choice3f1" class="domain.Choice">
- 		<property name="text" value="Si"/>
- 	</bean>
- 	<bean id="choice3e1" class="domain.Choice">
- 		<property name="text" value="No"/>
- 	</bean>
- 	<bean id="choice3e2" class="domain.Choice">
- 		<property name="text" value="Si"/>
- 	</bean>
- 	<bean id="choice332" class="domain.Choice">
- 		<property name="text" value="No"/>
- 	</bean>
- 	<bean id="choice341" class="domain.Choice">
- 		<property name="text" value="Si"/>
- 	</bean>
- 	<bean id="choice342" class="domain.Choice">
- 		<property name="text" value="No"/>
- 	</bean>
 	
 	<bean id="instance6" class="domain.Instance">
 		<property name="name" value="anonimous" />
@@ -645,35 +588,43 @@
 	</bean>
 		
 	<bean id="answer031" class="domain.Answer">
-		<property name="choice" ref="choice342" />
+		<property name="question" value="1" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer032" class="domain.Answer">
-		<property name="choice" ref="choice332" />
+		<property name="question" value="2" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer033" class="domain.Answer">
-		<property name="choice" ref="choice3e1" />
+		<property name="question" value="3" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer034" class="domain.Answer">
-		<property name="choice" ref="choice312" />
+		<property name="question" value="4" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer035" class="domain.Answer">
-		<property name="choice" ref="choice312" />
+		<property name="question" value="1" />
+		<property name="selected" value="0" />
 	</bean>
 	
 	<bean id="answer036" class="domain.Answer">
-		<property name="choice" ref="choice3e1" />
+		<property name="question" value="2" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer037" class="domain.Answer">
-		<property name="choice" ref="choice332" />
+		<property name="question" value="3" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer038" class="domain.Answer">
-		<property name="choice" ref="choice342" />
+		<property name="question" value="4" />
+		<property name="selected" value="1" />
 	</bean>
  	
  	
@@ -709,10 +660,11 @@
  		<property name="statment" value="¿Te gusta andar?"/>
  		<property name="choices">
  			<list>
- 				<ref bean="choice411"/>
- 				<ref bean="choice412"/>
+ 				<value>Si</value>
+ 				<value>No</value>
  			</list>
  		</property>
+ 		<property name="number" value="1"/>
  		<property name="poll" ref="poll4"/>
  	</bean>
  	
@@ -720,10 +672,11 @@
  		<property name="statment" value="¿Sueles realizar alguna actividad física en tu tiempo libre?"/>
  		<property name="choices">
  			<list>
- 				<ref bean="choice4o1"/>
- 				<ref bean="choice4o2"/>
+ 				<value>Si</value>
+ 				<value>No</value>
  			</list>
  		</property>
+ 		<property name="number" value="2"/>
  		<property name="poll" ref="poll4"/>
  	</bean>
  	
@@ -731,31 +684,14 @@
  		<property name="statment" value="¿Te consideras una persona sedentaria?"/>
  		<property name="choices">
  			<list>
- 			 	<ref bean="choice431"/>
- 				<ref bean="choice432"/>
+ 				<value>Si</value>
+ 				<value>No</value>
  			</list>
  		</property>
+ 		<property name="number" value="3"/>
  		<property name="poll" ref="poll4"/>
  	</bean>
  	
-	<bean id="choice411" class="domain.Choice">
- 		<property name="text" value="Si"/>
- 	</bean>
- 	<bean id="choice412" class="domain.Choice">
- 		<property name="text" value="No"/>
- 	</bean>
- 	<bean id="choice4o1" class="domain.Choice">
- 		<property name="text" value="Si"/>
- 	</bean>
- 	<bean id="choice4o2" class="domain.Choice">
- 		<property name="text" value="No"/>
- 	</bean>
- 	<bean id="choice431" class="domain.Choice">
- 		<property name="text" value="Si"/>
- 	</bean>
- 	<bean id="choice432" class="domain.Choice">
- 		<property name="text" value="No"/>
- 	</bean>
 		
 	<bean id="instance7" class="domain.Instance">
 		<property name="name" value="real anonimous" />
@@ -786,27 +722,33 @@
 	</bean>
 	
 	<bean id="answer041" class="domain.Answer">
-		<property name="choice" ref="choice431" />
+		<property name="question" value="1" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer042" class="domain.Answer">
-		<property name="choice" ref="choice4o1" />
+		<property name="question" value="2" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer043" class="domain.Answer">
-		<property name="choice" ref="choice412" />
+		<property name="question" value="3" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer044" class="domain.Answer">
-		<property name="choice" ref="choice412" />
+		<property name="question" value="1" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer045" class="domain.Answer">
-		<property name="choice" ref="choice4o2" />
+		<property name="question" value="2" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	<bean id="answer046" class="domain.Answer">
-		<property name="choice" ref="choice432" />
+		<property name="question" value="3" />
+		<property name="selected" value="1" />
 	</bean>
 	
 	

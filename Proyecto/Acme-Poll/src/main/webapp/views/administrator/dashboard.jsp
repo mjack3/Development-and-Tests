@@ -18,10 +18,18 @@
 
 
 				
-		<spring:message code="dashboard.findMinAvgStdMaxPollsByPoller" var="dash1" />		
+		<spring:message code="dashboard.findMinAvgStdMaxPollsByPoller" var="dash1" />	
 		<h4><jstl:out value="${dash1}" />:</h4>
 		<jstl:out value="${findMinAvgStdMaxPollsByPoller}" />		
 		
-		<spring:message code="dashboard.findMinAvgStdMaxInstancesByPoll" var="dash1" />		
+		<br/><br/>
+		
+		<spring:message code="dashboard.findMinAvgStdMaxInstancesByPoll" var="dash1" />	
 		<h4><jstl:out value="${dash1}" />:</h4>
 		<jstl:out value="${findMinAvgStdMaxInstancesByPoll}" />		
+		
+		<br/><br/>
+		
+		<spring:message code="dashboard.findMinAvgStdMaxQuestionByPoll" var="dash1" />	
+		<h4><jstl:out value="${dash1}" />:</h4>
+		<jstl:out value="${findMinAvgStdMaxQuestionByPoll}" />		

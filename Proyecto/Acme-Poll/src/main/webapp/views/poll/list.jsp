@@ -25,7 +25,7 @@
 	<spring:message code="poll.search" />
 </button>
 
-<br/>
+<br />
 
 <display:table pagesize="5" keepStatus="true" name="poll"
 	requestURI="${requestURI}" id="row" class="table table-over">
@@ -58,30 +58,88 @@
 	<display:column property="endDate" title="${endDateHeader}"
 		sortable="false" />
 
+	<security:authorize access="permitAll() && !hasRole('POLLER')">
 
-	<display:column>
-		<a href="question/list.do?pollId=${row.id}"> <spring:message
-				code="poll.questions" />
-		</a>
-	</display:column>
+		<display:column>
+			<a href="question/list.do?q=${row.id}"> <spring:message
+					code="poll.questions" />
+			</a>
+		</display:column>
+
+		<display:column>
+			<a href="poller/view.do?pollId=${row.id}"> <spring:message
+					code="poll.poller" />
+			</a>
+		</display:column>
+
+		<display:column>
+			<a href="hint/list.do?q=${row.id}"> <spring:message
+					code="poll.hints" />
+			</a>
+		</display:column>
+
+		<jstl:if test="${row.endDate.after(actualDate)}">
+
+			<display:column>
+				<a href="answer/answer.do?q=${row.id}"> <spring:message
+						code="poll.answer" />
+				</a>
+			</display:column>
+
+		</jstl:if>
+
+	</security:authorize>
+
+	<security:authorize access="hasRole('POLLER')">
+
+		<display:column>
+			<a href="question/poller/list.do?q=${row.id}"> <spring:message
+					code="poll.questions" />
+			</a>
+		</display:column>
+
+		<display:column>
+			<a href="poller/view.do?pollId=${row.id}"> <spring:message
+					code="poll.poller" />
+			</a>
+		</display:column>
+
+		<display:column>
+			<a href="hint/poller/list.do?q=${row.id}"> <spring:message
+					code="poll.hints" />
+			</a>
+		</display:column>
+
+
+		<jstl:if test="${row.endDate.after(actualDate)}">
+		
+			<display:column>
+				<a href="poll/poller/edit.do?q=${row.id}"> <spring:message
+					code="acme.edit" />
+				</a>
+			</display:column>
+
+			<display:column>
+				<a href="poll/poller/remove.do?q=${row.id}"> <spring:message
+						code="acme.delete" />
+				</a>
+			</display:column>
+			
+			<display:column>
+				<a href="answer/answer.do?q=${row.id}"> <spring:message
+						code="poll.answer" />
+				</a>
+			</display:column>
+
+		</jstl:if>
+
+	</security:authorize>
 	
-	<display:column>
-		<a href="poller/view.do?pollId=${row.id}"> <spring:message
-				code="poll.poller" />
-		</a>
-	</display:column>
-	
-	<display:column>
-		<a href="hint/poller/list.do?q=${row.id}"> <spring:message
-				code="poll.hints" />
-		</a>
-	</display:column>
-	
-	<display:column>
-		<a href="poll/poller/remove.do?q=${row.id}"> <spring:message
-				code="acme.delete" />
-		</a>
-	</display:column>
+		<display:column>
+			<a href="poll/results.do?q=${row.id}"> <spring:message
+					code="poll.result" />
+			</a>
+		</display:column>
 
 
 </display:table>
@@ -90,31 +148,57 @@
 
 
 <script>
-	$(document).ready(function() {
-		$("button").click(function() {
-			$.ajax({
-				success : function(result) {
-					var input, filter, table, tr, tdTitle, tdDescription,tdTicker, i;
-					input = document.getElementById("textSearch");
-					filter = input.value.toUpperCase();
-					table = document.getElementById("row");
-					tr = table.getElementsByTagName("tr");
-					for (i = 0; i < tr.length; i++) {
-						tdTitle = tr[i].getElementsByTagName("td")[0];
-						tdTicker = tr[i].getElementsByTagName("td")[1];
-						tdDescription = tr[i].getElementsByTagName("td")[2];
-						if (tdTitle || tdDescription || tdTicker) {
-							if (tdTitle.innerHTML.toUpperCase().indexOf(filter) > -1 || tdDescription.innerHTML.toUpperCase().indexOf(filter) > -1 || tdTicker.innerHTML.toUpperCase().indexOf(filter) > -1) {
-								tr[i].style.display = "";
-							} else {
-								tr[i].style.display = "none";
-							}
-						}
-					}
-				}
-			});
-		});
-	});
+	$(document)
+			.ready(
+					function() {
+						$("button")
+								.click(
+										function() {
+											$
+													.ajax({
+														success : function(
+																result) {
+															var input, filter, table, tr, tdTitle, tdDescription, tdTicker, i;
+															input = document
+																	.getElementById("textSearch");
+															filter = input.value
+																	.toUpperCase();
+															table = document
+																	.getElementById("row");
+															tr = table
+																	.getElementsByTagName("tr");
+															for (i = 0; i < tr.length; i++) {
+																tdTitle = tr[i]
+																		.getElementsByTagName("td")[0];
+																tdTicker = tr[i]
+																		.getElementsByTagName("td")[1];
+																tdDescription = tr[i]
+																		.getElementsByTagName("td")[2];
+																if (tdTitle
+																		|| tdDescription
+																		|| tdTicker) {
+																	if (tdTitle.innerHTML
+																			.toUpperCase()
+																			.indexOf(
+																					filter) > -1
+																			|| tdDescription.innerHTML
+																					.toUpperCase()
+																					.indexOf(
+																							filter) > -1
+																			|| tdTicker.innerHTML
+																					.toUpperCase()
+																					.indexOf(
+																							filter) > -1) {
+																		tr[i].style.display = "";
+																	} else {
+																		tr[i].style.display = "none";
+																	}
+																}
+															}
+														}
+													});
+										});
+					});
 </script>
 
 

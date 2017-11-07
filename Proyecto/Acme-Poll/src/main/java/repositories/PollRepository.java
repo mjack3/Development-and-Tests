@@ -13,7 +13,7 @@ import domain.Poll;
 @Repository
 public interface PollRepository extends JpaRepository<Poll, Integer> {
 
-	@Query("select p from Poll p where p.endDate <= ?1")
+	@Query("select p from Poll p where p.startDate <= ?1 and p.endDate >= ?1")
 	List<Poll> findPollActivated(Date today);
 
 	@Query("select min(p.polls.size),avg(p.polls.size), stddev(p.polls.size),max(p.polls.size) from Poller p")
@@ -24,5 +24,5 @@ public interface PollRepository extends JpaRepository<Poll, Integer> {
 
 	//The minimum, the average, the standard deviation, and the maximum num-ber of questions per poll.
 	@Query("select min(p.questions.size),avg(p.questions.size), stddev(p.questions.size),max(p.questions.size) from Poll p")
-	List<Integer> findMinAvgStdMaxQuestionByPoll();
+	Double[] findMinAvgStdMaxQuestionByPoll();
 }

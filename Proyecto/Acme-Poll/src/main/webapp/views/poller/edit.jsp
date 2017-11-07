@@ -24,7 +24,12 @@
 		<form:hidden path="userAccount.username" />
 		<form:hidden path="userAccount.password" />
 		<form:hidden path="userAccount.authorities" />
-		<form:hidden path="polls" />
+		<form:hidden path="userAccount.banned" />
+		<form:hidden path="chirps" />
+		
+		<security:authorize access="hasRole('POLLER')">
+			<form:hidden path="polls" />
+		</security:authorize>
 
 
 	    <div class="form-group" style="width: 20%;"> 

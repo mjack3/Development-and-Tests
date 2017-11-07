@@ -29,11 +29,13 @@
 						<li><a class="fNiv" href="security/login.do"><spring:message
 									code="master.page.login" /></a></li>
 						
-						<li><a class="fNiv" href="poll/list.do"><spring:message
+					</security:authorize>
+					
+					<security:authorize access="permitAll()">
+					
+					<li><a class="fNiv" href="poll/list.do"><spring:message
 									code="master.page.poll.list" /></a></li>
-						
-
-						
+									
 					</security:authorize>
 
 					<security:authorize access="isAuthenticated()">

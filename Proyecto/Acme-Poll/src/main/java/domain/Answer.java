@@ -7,25 +7,40 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.validator.constraints.Range;
+
 @Entity
 @Access(AccessType.PROPERTY)
 public class Answer extends DomainEntity {
 
-	private Choice	choice; 
+	private Integer question;
+	private Integer selected;
 	
 	public Answer() {
 		super();
 	}
 
 	@NotNull
-	@ManyToOne(optional=false)
-	public Choice getChoice() {
-		return choice;
+	@Range(min=1)
+	public Integer getQuestion() {
+		return question;
 	}
 
-	public void setChoice(Choice choice) {
-		this.choice = choice;
+	public void setQuestion(Integer question) {
+		this.question = question;
 	}
+
+	@NotNull
+	@Range(min=0)
+	public Integer getSelected() {
+		return selected;
+	}
+
+	public void setSelected(Integer selected) {
+		this.selected = selected;
+	}
+
+	
 
 	
 	

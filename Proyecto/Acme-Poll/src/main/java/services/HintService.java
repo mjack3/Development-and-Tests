@@ -24,7 +24,7 @@ public class HintService {
 
 	public void delete(Integer arg0) {
 		Assert.notNull(arg0);
-		Assert.isTrue(hintRepository.exists(arg0));
+//		Assert.isTrue(hintRepository.exists(arg0));
 		hintRepository.delete(arg0);
 	}
 

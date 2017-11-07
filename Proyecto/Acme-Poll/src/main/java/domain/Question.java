@@ -2,9 +2,11 @@
 package domain;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -13,6 +15,7 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Range;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -21,8 +24,10 @@ public class Question extends DomainEntity {
 	public Question() {
 	}
 
+	private Integer				number;
 	private String				statment;
-	private Collection<Choice>	choices;
+	private List<String>		choices;
+
 
 	@NotBlank
 	public String getStatment() {
@@ -34,13 +39,22 @@ public class Question extends DomainEntity {
 	}
 
 	@NotNull
-	@NotEmpty
-	@OneToMany
-	public Collection<Choice> getChoices() {
+	@Range(min=1)
+	public Integer getNumber() {
+		return number;
+	}
+
+	public void setNumber(Integer number) {
+		this.number = number;
+	}
+
+	@NotNull
+	@ElementCollection(targetClass=String.class)
+	public List<String> getChoices() {
 		return choices;
 	}
 
-	public void setChoices(Collection<Choice> choices) {
+	public void setChoices(List<String> choices) {
 		this.choices = choices;
 	}
 
