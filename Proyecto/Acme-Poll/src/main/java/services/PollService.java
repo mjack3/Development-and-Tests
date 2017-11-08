@@ -128,17 +128,17 @@ public class PollService {
 		return res;
 	}
 
-	public List<Integer> getResults(final Integer q) {
-
-		final Poll poll = this.pollRepository.findOne(q);
-		final Map<Integer, List<Integer>> res = new HashMap<Integer, List<Integer>>();
-		final List<Question> questionsTotal = (List<Question>) poll.getQuestions();
-		for (int i = 0; i < questionsTotal.size(); i++) {
-			final Integer quest = i;
-			final Integer cont = questionsTotal.get(i).getChoices().size();
-			for (int b = 0; b < cont; b++)
-				if (res.get(quest) == null || res.get(quest).isEmpty()) {
-					final List<Integer> choicess = new LinkedList<Integer>();
+	public List<Integer> getResults(Integer q) {
+		
+		Poll poll = pollRepository.findOne(q);
+		Map<Integer,List<Integer>> res = new HashMap<Integer,List<Integer>>();
+		List<Question> questionsTotal =(List<Question>) poll.getQuestions();
+		for(int i = 0; i<questionsTotal.size();i++) {
+			Integer quest= i;
+			Integer cont = questionsTotal.get(i).getChoices().size();
+			for(int b=0;b<cont;b++) {
+				if(res.get(quest)==null || res.get(quest).isEmpty()) {
+					List<Integer> choicess = new LinkedList<Integer>();
 					choicess.add(b, new Integer(0));
 					res.put(quest, choicess);
 				} else {

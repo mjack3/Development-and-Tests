@@ -21,4 +21,14 @@
 		<put-attribute name="body" value="/views/hint/list.jsp" />
 	</definition>
 	
+	<definition name="hint/create" extends="master.page">
+		<put-attribute name="title" value="Create hint" />
+		<put-attribute name="body" value="/views/hint/create.jsp" />
+	</definition>
+	
+	<definition name="hint/score" extends="master.page">
+		<put-attribute name="title" value="Score hint" />
+		<put-attribute name="body" value="/views/hint/score.jsp" />
+	</definition>
+	
 </tiles-definitions>

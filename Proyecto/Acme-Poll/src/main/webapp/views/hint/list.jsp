@@ -34,7 +34,26 @@
 	<display:column property="mark" title="${markHeader}"
 		sortable="false" />
 		
+		
+	<spring:message code="hint.state" var="stateHeader" />
+	<display:column title="${stateHeader}" sortable="false" >
+		<a href="hint/score.do?q=${row.id}&p=${pollId}"> ${stateHeader} </a>
+	</display:column>
+	
+	<security:authorize access="hasRole('ADMINISTRATOR')">	
+		<spring:message code="acme.delete" var="removeHeader" />
+		<display:column title="${removeHeader}" sortable="false" >
+			<a href="hint/remove.do?q=${row.id}&p=${pollId}"> ${removeHeader} </a>
+		</display:column>
+	</security:authorize>
+
+		
 </display:table>
+
+<br/>
+<br/>
+
+<a href="hint/create.do?q=${pollId}"> <spring:message code="hint.create" /> </a>
 
 
 

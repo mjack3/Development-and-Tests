@@ -15,6 +15,7 @@ public class HintPollerController {
 
 	@Autowired
 	private PollService pollService;
+
 	
 	@RequestMapping("/list")
 	public ModelAndView list(@RequestParam Integer q) {
@@ -25,7 +26,10 @@ public class HintPollerController {
 		Poll poll = pollService.findOne(q);
 		
 		res.addObject("hint", poll.getHints());
+		res.addObject("pollId", q);
 
 		return res;
 	}
+	
+	
 }

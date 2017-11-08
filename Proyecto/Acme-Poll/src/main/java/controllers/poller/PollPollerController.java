@@ -74,8 +74,7 @@ public class PollPollerController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Poll poll,BindingResult binding) {
 		ModelAndView res= null;
-		System.out.println(poll.getStartDate());
-		System.out.println(poll.getEndDate());
+
 		if (binding.hasErrors()) {
 			res = new ModelAndView("poll/edit");
 			res.addObject("poll", poll);
