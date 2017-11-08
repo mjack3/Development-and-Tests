@@ -64,6 +64,8 @@ function save(){
 	
 	//Comprobacion de que haya respondido todas las preguntas
 	if($( ":input:checked" ).length == ${question.size()}){
+		
+		
 		var res = "";
 		
 		//Recorro todos los input que estan marcados

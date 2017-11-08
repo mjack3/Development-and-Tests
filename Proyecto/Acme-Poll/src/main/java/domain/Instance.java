@@ -6,13 +6,13 @@ import java.util.HashSet;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -29,7 +29,7 @@ public class Instance extends DomainEntity {
 	private String	city;
 
 
-	@NotBlank
+	@Column(unique = true)
 	public String getName() {
 		return this.name;
 	}
@@ -38,8 +38,7 @@ public class Instance extends DomainEntity {
 		this.name = name;
 	}
 
-	@NotNull
-	@Valid
+	@Pattern(regexp = "^MALE|FEMALE|$")
 	public String getGender() {
 		return this.gender;
 	}
@@ -48,7 +47,6 @@ public class Instance extends DomainEntity {
 		this.gender = gender;
 	}
 
-	@NotBlank
 	public String getCity() {
 		return this.city;
 	}
@@ -83,6 +81,5 @@ public class Instance extends DomainEntity {
 	public void setAnswers(final Collection<Answer> answers) {
 		this.answers = answers;
 	}
-
 
 }

@@ -20,24 +20,24 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<jstl:set value="0" var="j" />
 
-<jstl:forEach begin="0" end="${question.size()-1}" var="a">
-	
-	<b>${question.get(a).number}. ${question.get(a).statment}</b>
+<jstl:forEach items="${question }" var="q">
 
-	<br />
-	
-	<div class="btn-group" data-toggle="buttons">
-	<jstl:forEach begin="0" end="${question.get(a).choices.size()-1}" var="i">
 
-		${question.get(a).choices.get(i)} ( ${ results.get(a+i) } )
-		<br/>
 
+<b><jstl:out value="${q.number}: ${q.statment } " /><br /></b>
+
+	<jstl:forEach var="i" begin="0" end="${q.choices.size() -1 }">
+		<jstl:out value="${q.choices.get(i)}: ${results.get(j) }" /> <br/>
+		<jstl:set value="${j+1 }" var="j" />
 	</jstl:forEach>
-	</div>
-	<br/>
+	
 
+	
 </jstl:forEach>
+
+	
 
 
 <script>
