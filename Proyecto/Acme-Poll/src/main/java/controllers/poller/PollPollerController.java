@@ -17,6 +17,7 @@ import domain.Poller;
 import security.LoginService;
 import services.PollService;
 import services.PollerService;
+import services.ValidPeriodService;
 
 @Controller
 @RequestMapping("/poll/poller")
@@ -27,6 +28,9 @@ public class PollPollerController {
 
 	@Autowired
 	private PollService pollService;
+	
+	@Autowired
+	private ValidPeriodService	validPeriodService;
 
 
 	@RequestMapping("/list")
@@ -39,6 +43,7 @@ public class PollPollerController {
 
 		res.addObject("poll", poller.getPolls());
 		res.addObject("actualDate", Calendar.getInstance().getTime());
+		res.addObject("validPeriod", validPeriodService.get().getMinimumPeriod());
 
 		return res;
 	}

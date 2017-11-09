@@ -57,6 +57,7 @@
 								<li><a href="administrator/edit.do?userAccountID=${id}"><spring:message code="master.page.administrator.edit" /></a></li>
 								<li><a href="administrator/dashboard.do"><spring:message code="master.page.administrator.dashboard" /></a></li>
 								<li><a href="poller/administrator/list.do"><spring:message code="master.page.administrator.poller" /></a></li>
+								<li><a href="validPeriod/administrator/edit.do"><spring:message code="master.page.validPeriod.edit" /></a></li>
 						
 						</security:authorize>
 						

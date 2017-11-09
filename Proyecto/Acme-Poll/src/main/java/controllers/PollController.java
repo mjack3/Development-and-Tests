@@ -4,7 +4,6 @@ package controllers;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Poll;
 import services.PollService;
+import services.ValidPeriodService;
 
 @Controller
 @RequestMapping("/poll")
@@ -22,6 +22,9 @@ public class PollController extends AbstractController {
 
 	@Autowired
 	private PollService	pollService;
+	
+	@Autowired
+	private ValidPeriodService	validPeriodService;
 
 
 	public PollController() {
@@ -38,6 +41,7 @@ public class PollController extends AbstractController {
 		final List<Poll> catalogue = pollService.findPollActivated();
 		result.addObject("poll", catalogue);
 		result.addObject("actualDate", actualDate);
+		result.addObject("validPeriod", validPeriodService.get().getMinimumPeriod());
 		return result;
 	}
 	
