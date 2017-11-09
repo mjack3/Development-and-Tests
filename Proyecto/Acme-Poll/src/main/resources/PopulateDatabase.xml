@@ -97,7 +97,7 @@
   		<property name="name" value="adminName" />
   		<property name="surname" value="adminSurname" />
   		<property name="email" value="adminEmail@admin.es" />
-  		<property name="phone" value="+34 (68) 687975536" />
+  		<property name="phone" value="+34(68)687975536" />
   		<property name="address" value="11560" />
   		<property name="chirps" >
   			<list></list>
@@ -111,7 +111,7 @@
   		<property name="name" value="poller1Name" />
   		<property name="surname" value="poller1Surname" />
   		<property name="email" value="poller1@poller.es" />
-  		<property name="phone" value="+34 (34) 5654554" />
+  		<property name="phone" value="+34(34)5654554" />
   		<property name="address" value="11560" />
   		 <property name="chirps" >
   			<list></list>
@@ -123,7 +123,7 @@
   		<property name="name" value="poller2Name" />
   		<property name="surname" value="poller2Surname" />
   		<property name="email" value="poller2@poller.es" />
-  		<property name="phone" value="+56 (213) 54554" />
+  		<property name="phone" value="+56(213)54554" />
   		<property name="address" value="11560" />
   		<property name="chirps" >
   			<list></list>
@@ -135,7 +135,7 @@
   		<property name="name" value="poller3Name" />
   		<property name="surname" value="poller3Surname" />
   		<property name="email" value="poller3@poller.es" />
-  		<property name="phone" value="+56 (213) 54554" />
+  		<property name="phone" value="+56(213)54554" />
   		<property name="address" value="11560" />
   		<property name="chirps" >
   			<list></list>
@@ -147,7 +147,7 @@
   		<property name="name" value="poller4Name" />
   		<property name="surname" value="poller4Surname" />
   		<property name="email" value="poller4@poller.es" />
-  		<property name="phone" value="+56 (213) 54554" />
+  		<property name="phone" value="+56(213)54554" />
   		<property name="address" value="11560" />
   		<property name="chirps" >
   			<list></list>
@@ -159,7 +159,7 @@
   		<property name="name" value="poller5Name" />
   		<property name="surname" value="poller5Surname" />
   		<property name="email" value="poller5@poller.es" />
-  		<property name="phone" value="+58 (99) 54554" />
+  		<property name="phone" value="+58(99)54554" />
   		<property name="address" value="11560" />
   		<property name="chirps" >
   			<list></list>
@@ -633,7 +633,7 @@
  	
  	
  	<bean id="poll4" class="domain.Poll">
- 		<property name="title" value="titulo: Poll sin respuestas" />
+ 		<property name="title" value="titulo: Poll pon pocas respuestas" />
  		<property name="ticket" value="bb-11111" />
  		<property name="description" value="Poll sin respuestas" />
  		<property name="banner" value="https://lihembensayel.files.wordpress.com/2013/09/imagen1.jpg?w=833" />
@@ -678,6 +678,33 @@
   		</property>
  	</bean>
  	
+ 	
+ 	<bean id="poll6" class="domain.Poll">
+ 		<property name="title" value="titulo: Poll sin comenzar" />
+ 		<property name="ticket" value="dd-11111" />
+ 		<property name="description" value="Poll sin respuestas" />
+ 		<property name="banner" value="https://lihembensayel.files.wordpress.com/2013/09/imagen1.jpg?w=833" />
+ 		<property name="startDate" value="11/08/2019" />
+ 		<property name="endDate" value="11/08/2020" />
+ 		<property name="poller" ref="poller5"/>
+ 		<property name="hints" >
+  			<list></list>
+  		</property>
+  		<property name="questions" >
+  			<list>
+  				<ref bean="question61"/>
+  				<ref bean="question62"/>
+  			</list>
+  		</property>
+  		<property name="instances" >
+  			<list></list>
+  		</property>
+ 	</bean>
+ 
+ 
+ 
+ 
+ 
  	
  
  	<bean id="question41" class="domain.Question">
@@ -742,6 +769,31 @@
  		<property name="poll" ref="poll5"/>
  	</bean>
  	
+ 	<bean id="question61" class="domain.Question">
+ 		<property name="statment" value="No es una pregunta, tampoco deberias verla"/>
+ 		<property name="choices">
+ 			<list>
+ 				<value>Si</value>
+ 				<value>A veces</value>
+ 				<value>No</value>
+ 			</list>
+ 		</property>
+ 		<property name="number" value="1"/>
+ 		<property name="poll" ref="poll6"/>
+ 	</bean>
+ 	
+ 	<bean id="question62" class="domain.Question">
+ 		<property name="statment" value="Porque estamos en el futuro"/>
+ 		<property name="choices">
+ 			<list>
+ 				<value>Si</value>
+ 				
+ 				<value>No</value>
+ 			</list>
+ 		</property>
+ 		<property name="number" value="2"/>
+ 		<property name="poll" ref="poll6"/>
+ 	</bean>
 		
 	<bean id="instance7" class="domain.Instance">
 		<property name="name" value="real anonimous" />
