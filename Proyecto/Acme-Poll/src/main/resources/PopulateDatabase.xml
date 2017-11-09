@@ -253,7 +253,7 @@
  	<bean id="instance1" class="domain.Instance">
 		<property name="name" value="anonimous" />
 		<property name="city" value="Sevilla" />
-		<property name="gender" value="Hombre" />
+		<property name="gender" value="HOMBRE" />
 		<property name="poll" ref="poll1"	/>
 		<property name="answers">
  			<list>
@@ -266,9 +266,9 @@
 	</bean>
 	
 	<bean id="instance2" class="domain.Instance">
-		<property name="name" value="anonimous" />
+		<property name="name" value="anonimous2" />
 		<property name="city" value="Madrid" />
-		<property name="gender" value="Hombre" />
+		<property name="gender" value="HOMBRE" />
 		<property name="poll" ref="poll1"	/>
 		<property name="answers">
  			<list>
@@ -281,9 +281,9 @@
 	</bean>
 	
 	<bean id="instance3" class="domain.Instance">
-		<property name="name" value="anonimous" />
+		<property name="name" value="anonimous3" />
 		<property name="city" value="Sevilla" />
-		<property name="gender" value="Mujer" />
+		<property name="gender" value="MUJER" />
 		<property name="poll" ref="poll1"	/>
 		<property name="answers">
  			<list>
@@ -439,9 +439,9 @@
  	
  	
  	<bean id="instance4" class="domain.Instance">
-		<property name="name" value="anonimous" />
+		<property name="name" value="anonimous4" />
 		<property name="city" value="Barcelona" />
-		<property name="gender" value="Mujer"/>
+		<property name="gender" value="MUJER"/>
 		<property name="poll" ref="poll2"	/>
 		<property name="answers">
  			<list>
@@ -508,9 +508,9 @@
  	</bean>
  	
  	<bean id="instance5" class="domain.Instance">
-		<property name="name" value="anonimous" />
+		<property name="name" value="anonimous5" />
 		<property name="city" value="Madrid" />
-		<property name="gender" value="Mujer"/>
+		<property name="gender" value="MUJER"/>
 		<property name="poll" ref="poll3"	/>
 		<property name="answers">
  			<list>
@@ -573,9 +573,9 @@
  	
 	
 	<bean id="instance6" class="domain.Instance">
-		<property name="name" value="anonimous" />
+		<property name="name" value="anonimous6" />
 		<property name="city" value="Madrid" />
-		<property name="gender" value="Mujer"/>
+		<property name="gender" value="MUJER"/>
 		<property name="poll" ref="poll3"	/>
 		<property name="answers">
  			<list>
@@ -746,7 +746,7 @@
 	<bean id="instance7" class="domain.Instance">
 		<property name="name" value="real anonimous" />
 		<property name="city" value="Sevilla" />
-		<property name="gender" value="Hombre"/>
+		<property name="gender" value="HOMBRE"/>
 		<property name="poll" ref="poll4"	/>
 		<property name="answers">
  			<list>
@@ -760,7 +760,7 @@
 	<bean id="instance8" class="domain.Instance">
 		<property name="name" value="new anonimous" />
 		<property name="city" value="Sevilla" />
-		<property name="gender" value="Mujer"/>
+		<property name="gender" value="MUJER"/>
 		<property name="poll" ref="poll4"	/>
 		<property name="answers">
  			<list>

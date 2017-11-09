@@ -50,6 +50,18 @@ public class AnswerController {
 
 		try {
 
+			/*
+			 * final Pattern pattern = Pattern.compile("^MALE|FEMALE|HOMBRE|MUJER|$");
+			 * final Matcher m = pattern.matcher(gender);
+			 * 
+			 * if (!m.matches()) {
+			 * res = this.answer(this.toSave);
+			 * res.addObject("genderMessage", "must.be.gender");
+			 * return res;
+			 * 
+			 * }
+			 */
+
 			final String[] answers = data.substring(1, data.length()).split(",");
 			final List<Answer> ansToSave = new LinkedList<Answer>();
 			final Poll p = this.pollService.findOne(this.toSave);
@@ -66,8 +78,9 @@ public class AnswerController {
 			res.addObject("poll", this.pollService.findPollActivated());
 
 		} catch (final Throwable oops) {
-			res = new ModelAndView("redirect:/poll/list.do");
+			res = new ModelAndView("redirect:/welcome/index.do");
 			res.addObject("message", "answer.commit.error");
+
 		}
 		return res;
 	}

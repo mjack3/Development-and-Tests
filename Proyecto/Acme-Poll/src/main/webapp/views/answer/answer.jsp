@@ -20,6 +20,13 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
+<script>
+
+//$(function() {
+  //  $("input[name='genderId']").val("");
+//});
+
+</script>
 
 <b><spring:message code="answer.name" /></b>
 <input type="text" class="form-control" style="width: 30%;" name="name" id="name">
@@ -27,12 +34,15 @@
 <br/>
 
 <b><spring:message code="answer.gender" /></b>
-<input type="text" class="form-control" style="width: 30%;" name="gender" id="gender">
+
+<input type="text" id="gender" class="form-control" style="width: 30%;" name="gender" />
+
 
 <br/>
 
 <b><spring:message code="answer.city" /></b>
-<input type="text" class="form-control" style="width: 30%;" name="city" id="city">
+
+<input type="text" class="form-control" style="width: 30%;" name="city"/>
 
 <br/>
 <br/>
@@ -58,11 +68,17 @@
 <input type="button" class="btn-primary" value='<spring:message code='answer.save' />' onclick="save();">
 
 <spring:message code="answer.alert" var="alert" />
+<spring:message code="must.be.gender" var="alert1" />
 <script>
 
 function save(){
 	//Comprobacion de que haya respondido todas las preguntas y rellenado todos los campos
-	if(($( ":input:checked" ).length == ${question.size()}) && ($("#name").val() != "") && $("#gender").val() != "" && $("#city").val() != ""){
+	if($( ":input:checked" ).length == ${question.size()}){
+		
+		// comprobacion del género
+		var val1 = $('#gender').val();
+		
+		if(val1 === "HOMBRE" || val1 === "MUJER" || val1 ==="MALE" || val1 ==="FEMALE" || val1 === ""){
 		
 		
 		var res = "";
@@ -71,6 +87,7 @@ function save(){
 		$( ":input:checked" ).each(function() { 
 			res = res + "," + $(this).attr('value');
 		});
+		
 
 		//Llamada POST 
 		$.ajax({
@@ -80,7 +97,13 @@ function save(){
 		}); 
 		
 		//Redireccion
-		document.location.href = 'poll/list.do';
+		// Debe de mostrar un mensaje de error si el name ya está usado document.location.href = 'poll/list.do';
+		}
+		else{
+			alert("${alert1}");
+		}
+		
+		
 	}else{
 		alert("${alert}");
 	}
@@ -88,3 +111,9 @@ function save(){
 }
 
 </script>
+
+<?php
+
+
+
+?>
