@@ -78,7 +78,7 @@ public class AnswerController {
 			res.addObject("poll", this.pollService.findPollActivated());
 
 		} catch (final Throwable oops) {
-			res = new ModelAndView("redirect:/welcome/index.do");
+			res = new ModelAndView("redirect:/welcome/index.o");
 			res.addObject("message", "answer.commit.error");
 
 		}

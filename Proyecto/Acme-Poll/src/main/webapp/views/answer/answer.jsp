@@ -95,7 +95,8 @@ function save(){
 		    type: "POST",
 		    data: {'data':res,'city':$('[name="city"]').val(),'gender':$('[name="gender"]').val(),'name':$('[name="name"]').val()}
 		}); 
-		
+
+
 		//Redireccion
 		// Debe de mostrar un mensaje de error si el name ya está usado document.location.href = 'poll/list.do';
 		}
