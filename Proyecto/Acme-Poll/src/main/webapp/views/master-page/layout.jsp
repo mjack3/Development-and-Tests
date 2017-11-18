@@ -80,5 +80,9 @@
 		<tiles:insertAttribute name="footer" />
 	</div>
 
+ <b> <jstl:out value="Page hit counter: ${cookie.hitCounter.value}"/> </b>
+
+
+
 </body>
 </html>
