@@ -13,8 +13,12 @@ package controllers;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -26,7 +30,7 @@ import security.LoginService;
 public class WelcomeController extends AbstractController {
 
 	@Autowired
-	private LoginService loginService;
+	private LoginService	loginService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -38,7 +42,7 @@ public class WelcomeController extends AbstractController {
 	// Index ------------------------------------------------------------------		
 
 	@RequestMapping(value = "/index")
-	public ModelAndView index(@RequestParam(required = false, defaultValue = "John Doe") final String name) {
+	public ModelAndView index(@RequestParam(required = false, defaultValue = "John Doe") final String name, @CookieValue(value = "hitCounter", defaultValue = "0") Long hitCounter, final HttpServletResponse responde) {
 		ModelAndView result;
 		SimpleDateFormat formatter;
 		String moment;
@@ -47,6 +51,15 @@ public class WelcomeController extends AbstractController {
 		moment = formatter.format(new Date());
 
 		result = new ModelAndView("welcome/index");
+
+		//increment hitCounter
+		hitCounter++;
+		// create cookie and set it in response
+		final Cookie cookie = new Cookie("hitCounter", hitCounter.toString());
+
+		responde.addCookie(cookie);
+
+		//result.addObject("cookie", cookie);
 
 		result.addObject("name", name);
 
