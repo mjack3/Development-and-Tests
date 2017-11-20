@@ -52,7 +52,11 @@ public class PollService {
 	}
 
 	//CRUD Methods
-
+	
+	public Poll saveAF(Poll poll){
+		Assert.notNull(poll);
+		return this.pollRepository.saveAndFlush(poll);
+	}
 	public List<Poll> findAll() {
 		return this.pollRepository.findAll();
 	}

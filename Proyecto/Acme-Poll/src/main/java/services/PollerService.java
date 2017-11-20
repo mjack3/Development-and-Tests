@@ -62,6 +62,13 @@ public class PollerService {
 		}
 		return p;
 	}
+	public Poller saveAF(Poller poller) {
+		Assert.notNull(poller);
+		return this.pollerRepository.saveAndFlush(poller);
+
+		
+	}
+	
 
 	public boolean exists(final Integer arg0) {
 		Assert.notNull(arg0);

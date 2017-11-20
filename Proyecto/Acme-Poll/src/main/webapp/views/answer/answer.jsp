@@ -98,7 +98,7 @@ function save(){
 
 
 		//Redireccion
-		// Debe de mostrar un mensaje de error si el name ya está usado document.location.href = 'poll/list.do';
+	    document.location.href = 'poll/list.do';
 		}
 		else{
 			alert("${alert1}");
