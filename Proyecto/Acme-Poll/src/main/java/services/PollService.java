@@ -52,11 +52,7 @@ public class PollService {
 	}
 
 	//CRUD Methods
-	
-	public Poll saveAF(Poll poll){
-		Assert.notNull(poll);
-		return this.pollRepository.saveAndFlush(poll);
-	}
+
 	public List<Poll> findAll() {
 		return this.pollRepository.findAll();
 	}
@@ -170,5 +166,49 @@ public class PollService {
 
 		return resfinal;
 	}
+	
+	
+
+	public String findMinAvgMaxHintsByPoll() {
+		Object[] resultados = pollRepository.findMinAvgMaxHintsByPoll();
+		String res = "Min: " + resultados[0].toString() + ", Media: " + resultados[1].toString() 
+				+ ", Max:" + resultados[2].toString();
+		return res;
+	}
+
+	public String findPollWithMoreHints() {
+		List<Poll> polls=pollRepository.findPollWithMoreHints();
+		String res = "";
+		
+		for(Poll p: polls) {
+			res = res + p.getTitle() + ", ";
+		}
+		res=res.substring(0, res.length()-2);
+		return res;
+	}
+
+	public String findPollWithFewerHints() {
+		List<Poll> polls=pollRepository.findPollWithFewerHints();
+		String res = "";
+		
+		for(Poll p: polls) {
+			res = res + p.getTitle() + ", ";
+		}
+		res=res.substring(0, res.length()-2);
+		return res;
+	}
+
+	public String findPollWithHintsAbogeAverage() {
+		List<Poll> polls=pollRepository.findPollWithHintsAbogeAverage();
+		String res = "";
+		
+		for(Poll p: polls) {
+			res = res + p.getTitle() + ", ";
+		}
+		res=res.substring(0, res.length()-2);
+		return res;
+	}
+	
+	
 
 }

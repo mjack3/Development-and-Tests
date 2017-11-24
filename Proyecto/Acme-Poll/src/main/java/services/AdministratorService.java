@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.AdministratorRepository;
-import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
 import domain.Poller;
@@ -56,12 +55,6 @@ public class AdministratorService {
 		}
 		return a;
 	}
-	
-	public Administrator saveAF(final Administrator administrator) {
-		Assert.notNull(administrator);
-		
-		return this.administratorRepository.saveAndFlush(administrator);
-	}
 
 	public List<Administrator> findAll() {
 		return this.administratorRepository.findAll();
@@ -84,7 +77,6 @@ public class AdministratorService {
 	
 	public Poller bannedPoller(final int pollerId) {
 		Assert.notNull(pollerId);
-		Assert.notNull(this.findPrincipal());
 		Assert.isTrue(this.pollerService.exists(pollerId));
 		Poller poller = pollerService.findOne(pollerId);
 		final UserAccount account = poller.getUserAccount();
@@ -92,11 +84,6 @@ public class AdministratorService {
 		poller.setUserAccount(account);
 
 		return this.pollerService.save(poller);
-	}
-
-	private Administrator findPrincipal() {
-		Administrator admin  = this.findActorByUsername(LoginService.getPrincipal().getId());
-		return admin;
 	}
 
 	public Poller readmitPoller(final int pollerId) {

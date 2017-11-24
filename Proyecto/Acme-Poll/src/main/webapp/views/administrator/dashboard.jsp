@@ -32,4 +32,29 @@
 		
 		<spring:message code="dashboard.findMinAvgStdMaxQuestionByPoll" var="dash1" />	
 		<h4><jstl:out value="${dash1}" />:</h4>
-		<jstl:out value="${findMinAvgStdMaxQuestionByPoll}" />		
+		<jstl:out value="${findMinAvgStdMaxQuestionByPoll}" />
+		
+		<br/><br/>
+		
+		<spring:message code="dashboard.findMinAvgMaxHintsByPoll" var="dash1" />	
+		<h4><jstl:out value="${dash1}" />:</h4>
+		<jstl:out value="${findMinAvgMaxHintsByPoll}" />	
+		
+		<br/><br/>
+		
+		<spring:message code="dashboard.findPollWithMoreHints" var="dash1" />	
+		<h4><jstl:out value="${dash1}" />:</h4>
+		<jstl:out value="${findPollWithMoreHints}" />
+		
+		<br/><br/>
+		
+		<spring:message code="dashboard.findPollWithFewerHints" var="dash1" />	
+		<h4><jstl:out value="${dash1}" />:</h4>
+		<jstl:out value="${findPollWithFewerHints}" />		
+		
+		
+		<br/><br/>
+		
+		<spring:message code="dashboard.findPollWithHintsAbogeAverage" var="dash1" />	
+		<h4><jstl:out value="${dash1}" />:</h4>
+		<jstl:out value="${findPollWithHintsAbogeAverage}" />	

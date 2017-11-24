@@ -23,7 +23,6 @@
 		<form:hidden path="poller" />
 		<form:hidden path="hints" />
 
-
 	    <div class="form-group" style="width: 20%;"> 
 	    
 		<label> <spring:message code="poll.title"/> </label>
@@ -46,7 +45,6 @@
 		<label> <spring:message code="poll.endDate"/> </label><br />
 		<input class="form-control" value="${poll.endDate}" type="date" name="endDate"/>
 		<form:errors cssClass="error" path="endDate" /> <br />
-		
 		
 		</div>
 		

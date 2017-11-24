@@ -20,13 +20,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<script>
 
-//$(function() {
-  //  $("input[name='genderId']").val("");
-//});
-
-</script>
 
 <b><spring:message code="answer.name" /></b>
 <input type="text" class="form-control" style="width: 30%;" name="name" id="name">
@@ -36,8 +30,9 @@
 <b><spring:message code="answer.gender" /></b>
 
 <input type="text" id="gender" class="form-control" style="width: 30%;" name="gender" />
+<i><spring:message code="answer.regex"/></i>
 
-
+<br/>
 <br/>
 
 <b><spring:message code="answer.city" /></b>
@@ -65,13 +60,20 @@
 
 </jstl:forEach>
 
-<input type="button" class="btn-primary" value='<spring:message code='answer.save' />' onclick="save();">
+<spring:message code="actor.cancel" var="actorCancelHeader"/>
+		
+<input type="button" class="btn btn-primary" value='<spring:message code='answer.save' />' onclick="save();">
+<input onclick=" window.location = 'poll/list.do'" class="btn btn-warning" type="button" name="cancel" value="${actorCancelHeader}"/>
+
 
 <spring:message code="answer.alert" var="alert" />
 <spring:message code="must.be.gender" var="alert1" />
+<spring:message code="answer.commit.error2" var="alert2" />
+
 <script>
 
 function save(){
+	
 	//Comprobacion de que haya respondido todas las preguntas y rellenado todos los campos
 	if($( ":input:checked" ).length == ${question.size()}){
 		
@@ -93,14 +95,21 @@ function save(){
 		$.ajax({
 		    url: 'answer/save.do',
 		    type: "POST",
-		    data: {'data':res,'city':$('[name="city"]').val(),'gender':$('[name="gender"]').val(),'name':$('[name="name"]').val()}
+		    data: {'data':res,'city':$('[name="city"]').val(),'gender':$('[name="gender"]').val(),'name':$('[name="name"]').val()},
+		    success: function(result){
+		    	
+		    	//Si el resultado contiene el titulo del listado de poll es que es correcto
+		    	if(result !=null && (result.includes('Polls list') || result.includes('Lista de encuestas'))){
+		    		//Redireccion
+		   		 	document.location.href = 'poll/list.do';
+		    	}else{
+		    		alert("${alert2}");
+		    	}
+		    }
 		}); 
 
-
-		//Redireccion
-	    document.location.href = 'poll/list.do';
-		}
-		else{
+		
+		}else{
 			alert("${alert1}");
 		}
 		
@@ -112,9 +121,3 @@ function save(){
 }
 
 </script>
-
-<?php
-
-
-
-?>

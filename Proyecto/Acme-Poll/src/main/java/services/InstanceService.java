@@ -69,11 +69,11 @@ public class InstanceService {
 
 	public Instance save(final List<Answer> ansToSave, final Poll p, final String city, final String gender, final String name) {
 
-		final Collection<Instance> instances = this.instanceRepository.findAll();
+		final Collection<Instance> instances = p.getInstances();
 
 		for (final Instance instance : instances)
-			if (instance.getName().equals(name))
-				throw new IllegalArgumentException();
+			if (instance.getName().equalsIgnoreCase(name))
+				return null;
 
 		final Instance ins = new Instance();
 		ins.setGender(city);

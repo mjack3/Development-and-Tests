@@ -69,6 +69,11 @@ public class AdministratorController {
 		
 		result.addObject("findMinAvgStdMaxQuestionByPoll", pollService.findMinAvgStdMaxQuestionByPoll());
 		
+		result.addObject("findMinAvgMaxHintsByPoll", pollService.findMinAvgMaxHintsByPoll());
+		result.addObject("findPollWithMoreHints", pollService.findPollWithMoreHints());
+		result.addObject("findPollWithFewerHints", pollService.findPollWithFewerHints());
+		result.addObject("findPollWithHintsAbogeAverage", pollService.findPollWithHintsAbogeAverage());
+		
 		return result;
 
 	}

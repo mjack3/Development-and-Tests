@@ -38,7 +38,6 @@ public class Instance extends DomainEntity {
 		this.name = name;
 	}
 
-	@Pattern(regexp = "^MALE|FEMALE|HOMBRE|MUJER|$")
 	public String getGender() {
 		return this.gender;
 	}

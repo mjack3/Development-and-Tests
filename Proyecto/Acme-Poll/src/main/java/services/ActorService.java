@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import domain.Actor;
+import domain.Administrator;
+import domain.Poller;
 import repositories.ActorRepository;
+import security.LoginService;
 
 @Service
 @Transactional
@@ -20,6 +23,12 @@ public class ActorService {
 
 	@Autowired
 	private ActorRepository actorRepository;
+	
+	@Autowired
+	private AdministratorService administratorService;
+	
+	@Autowired
+	private PollerService pollerService;
 
 
 	//Constructor
@@ -55,5 +64,20 @@ public class ActorService {
 		Assert.notNull(arg0);
 		Assert.isTrue(actorRepository.exists(arg0.getId()));
 		return actorRepository.save(arg0);
+	}
+	
+	public Actor getActual(){
+		Actor res=null;
+		
+		Administrator a= administratorService.findActorByUsername(LoginService.getPrincipal().getId());
+		Poller p = pollerService.findActorByUsername(LoginService.getPrincipal().getId());
+		
+		if(a!=null) {
+			res = a;
+		}else {
+			res=p;
+		}
+		
+		return res;
 	}
 }

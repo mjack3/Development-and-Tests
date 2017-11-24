@@ -110,11 +110,11 @@
 			</a>
 		</display:column>
 
-		<jstl:if test="${row.endDate.after(actualDate)}">
-		
+		<jstl:if test="${row.startDate.after(actualDate)}">
+
 			<display:column>
 				<a href="poll/poller/edit.do?q=${row.id}"> <spring:message
-					code="acme.edit" />
+						code="acme.edit" />
 				</a>
 			</display:column>
 
@@ -123,46 +123,52 @@
 						code="acme.delete" />
 				</a>
 			</display:column>
-			
+
+
+
+		</jstl:if>
+
+		<jstl:if test="${row.endDate.after(actualDate)}">
 			<display:column>
 				<a href="answer/answer.do?q=${row.id}"> <spring:message
 						code="poll.answer" />
 				</a>
 			</display:column>
-
 		</jstl:if>
-
 	</security:authorize>
-	
-		<display:column>
-			<a href="poll/results.do?q=${row.id}"> <spring:message
-					code="poll.result" />
-			</a>
-		</display:column>
-		<jstl:if test="diffDaysValid(${row.endDate},${row.startDate},${validPeriod});">
-		<display:column>
-			<h5><b style="color: red;"> <spring:message code="poll.invalid" /> </b></h5>
-		</display:column>
-		</jstl:if>
 
+	<display:column>
+		<a href="poll/results.do?q=${row.id}"> <spring:message
+				code="poll.result" />
+		</a>
+	</display:column>
+	<jstl:if
+		test="diffDaysValid(${row.endDate},${row.startDate},${validPeriod});">
+		<display:column>
+			<h5>
+				<b style="color: red;"> <spring:message code="poll.invalid" />
+				</b>
+			</h5>
+		</display:column>
+	</jstl:if>
 
 </display:table>
 
 
 <script>
+	function diffDaysValid(date1, date2, invalidPeriod) {
 
-function diffDaysValid(date1,date2,invalidPeriod){
-	
-	var oneDay = 24*60*60*1000; // hours*minutes*seconds*milliseconds
-	var firstDate = date1;
-	var secondDate = date2;
+		var oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+		var firstDate = date1;
+		var secondDate = date2;
 
-	var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate.getTime())/(oneDay)));
-	console.log(invalidPeriod);
-	console.log(diffDays);
-	return diffDays>invalidPeriod;
-}
-
+		var diffDays = Math.round(Math.abs((firstDate.getTime() - secondDate
+				.getTime())
+				/ (oneDay)));
+		console.log(invalidPeriod);
+		console.log(diffDays);
+		return diffDays > invalidPeriod;
+	}
 </script>
 
 <script>

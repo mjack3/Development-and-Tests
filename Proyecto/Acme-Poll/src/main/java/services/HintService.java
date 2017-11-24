@@ -96,9 +96,8 @@ public class HintService {
 
 	public void remove(Integer q,Integer p) {
 		Hint h = hintRepository.findOne(q);
-		Assert.notNull(h);
 		Poll poll = pollService.findOne(p);
-		Assert.notNull(poll);
+		
 		List<Hint> list = (List<Hint>)poll.getHints();
 		list.remove(h);
 		poll.setHints(list);

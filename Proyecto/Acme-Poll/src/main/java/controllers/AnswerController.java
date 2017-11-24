@@ -1,8 +1,12 @@
 
 package controllers;
 
+import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +15,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import services.InstanceService;
-import services.PollService;
 import domain.Answer;
 import domain.Poll;
+import services.ActorService;
+import services.InstanceService;
+import services.PollService;
 
 @Controller
 @RequestMapping("/answer")
@@ -25,6 +30,9 @@ public class AnswerController {
 
 	@Autowired
 	private InstanceService	instanceService;
+
+	@Autowired
+	private ActorService	actorService;
 
 	private Integer			toSave;
 
@@ -42,29 +50,19 @@ public class AnswerController {
 
 		return res;
 	}
-
+	
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public ModelAndView save(final String data, final String gender, final String city, final String name) {
+	public String save(final String data, final String gender, final String city, final String name) {
 
-		ModelAndView res;
+		String res = null;
+		final Poll p = this.pollService.findOne(this.toSave);
 
 		try {
 
-			/*
-			 * final Pattern pattern = Pattern.compile("^MALE|FEMALE|HOMBRE|MUJER|$");
-			 * final Matcher m = pattern.matcher(gender);
-			 * 
-			 * if (!m.matches()) {
-			 * res = this.answer(this.toSave);
-			 * res.addObject("genderMessage", "must.be.gender");
-			 * return res;
-			 * 
-			 * }
-			 */
-
 			final String[] answers = data.substring(1, data.length()).split(",");
 			final List<Answer> ansToSave = new LinkedList<Answer>();
-			final Poll p = this.pollService.findOne(this.toSave);
+			
+
 			for (int i = 0; i < answers.length; i++) {
 				final Answer a = new Answer();
 				a.setSelected(new Integer(answers[i]));
@@ -72,15 +70,14 @@ public class AnswerController {
 				ansToSave.add(a);
 			}
 
-			this.instanceService.save(ansToSave, p, city, gender, name);
-
-			res = new ModelAndView("poll/list");
-			res.addObject("poll", this.pollService.findPollActivated());
-
-		} catch (final Throwable oops) {
-			res = new ModelAndView("redirect:/welcome/index.o");
-			res.addObject("message", "answer.commit.error");
-
+			//Se usa para diferenciar en la respuesta si ha respondido anteriormente esa encuesta
+			Object resultado = this.instanceService.save(ansToSave, p, city, gender, name);
+			if(resultado!=null)
+				res = "poll/list";
+			else
+				res="poller/list";
+		} catch (Exception e) {
+			res = "poll/list";
 		}
 		return res;
 	}
