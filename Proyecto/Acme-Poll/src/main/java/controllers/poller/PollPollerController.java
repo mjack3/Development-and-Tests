@@ -1,19 +1,23 @@
 package controllers.poller;
 
 import java.util.Calendar;
+import java.util.LinkedList;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Hint;
 import domain.Poll;
 import domain.Poller;
+import domain.Question;
 import security.LoginService;
 import services.PollService;
 import services.PollerService;
@@ -79,14 +83,21 @@ public class PollPollerController {
 	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Poll poll,BindingResult binding) {
 		ModelAndView res= null;
-
+		
 		if (binding.hasErrors()) {
 			res = new ModelAndView("poll/edit");
 			res.addObject("poll", poll);
 		} else {
 			try {
+				
+				if(poll.getStartDate().after(poll.getEndDate())) {
+					binding.rejectValue("startDate", "error.startDate", "error");
+					throw new IllegalArgumentException();
+				}
+								
+				
 				pollService.update(poll);
-				res = new ModelAndView("poll/edit");
+				res = new ModelAndView("redirect:list.do");
 				res.addObject("poll", poll);
 			}catch (Exception e) {
 				res = new ModelAndView("poll/edit");

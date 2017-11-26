@@ -28,6 +28,8 @@
 		<bean class="converters.ChirpToStringConverter" />
 		<bean class="converters.HintToStringConverter" />
 		<bean class="converters.ValidPeriodToStringConverter" />
+		<bean class="converters.InstanceToStringConverter" />
+		<bean class="converters.QuestionToStringConverter" />
 		
 
 		<bean class="converters.StringToUserAccountConverter" />
@@ -39,6 +41,8 @@
 		<bean class="converters.StringToChirpConverter" />
 		<bean class="converters.StringToHintConverter" />
 		<bean class="converters.StringToValidPeriodConverter" />
+		<bean class="converters.StringToInstanceConverter" />
+		<bean class="converters.StringToQuestionConverter" />
 		
 		
 		

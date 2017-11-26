@@ -119,6 +119,9 @@ public class PollService {
 	public Poll update(final Poll arg0) {
 		Assert.notNull(arg0);
 		Assert.isTrue(this.pollRepository.exists(arg0.getId()));
+//		Poll pollFind = pollRepository.findOne(arg0.getId());
+//		arg0.setQuestions(pollFind.getQuestions());
+//		arg0.setHints(pollFind.getHints());
 		return this.pollRepository.save(arg0);
 	}
 
