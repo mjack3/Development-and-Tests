@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import repositories.PollRepository;
 import domain.Actor;
 import domain.Answer;
 import domain.Hint;
@@ -23,7 +24,6 @@ import domain.Instance;
 import domain.Poll;
 import domain.Poller;
 import domain.Question;
-import repositories.PollRepository;
 
 @Service
 @Transactional
@@ -214,6 +214,11 @@ public class PollService {
 
 	public List<Actor> actorsAboveAvg() {
 		return this.pollRepository.actorsAboveAvg();
+	}
+
+	public Poll saveAF(final Poll poll) {
+		Assert.notNull(poll);
+		return this.pollRepository.saveAndFlush(poll);
 	}
 
 }

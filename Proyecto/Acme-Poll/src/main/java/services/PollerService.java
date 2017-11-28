@@ -20,7 +20,7 @@ public class PollerService {
 	//Manager repositories
 
 	@Autowired
-	private PollerRepository pollerRepository;
+	private PollerRepository	pollerRepository;
 
 
 	//Constructor
@@ -42,7 +42,7 @@ public class PollerService {
 
 	//CRUD Methods
 
-	public Poller save(Poller poller) {
+	public Poller save(final Poller poller) {
 		Assert.notNull(poller);
 		Poller p = null;
 
@@ -56,7 +56,7 @@ public class PollerService {
 			p.setPolls(poller.getPolls());
 			p = this.pollerRepository.save(p);
 		} else {
-			Md5PasswordEncoder encoder = new Md5PasswordEncoder();
+			final Md5PasswordEncoder encoder = new Md5PasswordEncoder();
 			poller.getUserAccount().setPassword(encoder.encodePassword(poller.getUserAccount().getPassword(), null));
 			p = this.pollerRepository.save(poller);
 		}
@@ -83,11 +83,16 @@ public class PollerService {
 		return this.pollerRepository.pollersBanned();
 	}
 
-	public Boolean isBanned(int pollerId) {
-		Assert.isTrue(pollerId!=0);
-		Poller poller = this.findOne(pollerId);
+	public Boolean isBanned(final int pollerId) {
+		Assert.isTrue(pollerId != 0);
+		final Poller poller = this.findOne(pollerId);
 		return this.pollersBanned().contains(poller);
-		
+
 	}
 
+	public Poller saveAF(final Poller poller) {
+		Assert.notNull(poller);
+		return this.pollerRepository.saveAndFlush(poller);
+
+	}
 }

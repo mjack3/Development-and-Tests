@@ -22,9 +22,9 @@ public class AdministratorService {
 	//Manager repositories
 
 	@Autowired
-	private AdministratorRepository administratorRepository;
-	@Autowired 
-	private PollerService pollerService;
+	private AdministratorRepository	administratorRepository;
+	@Autowired
+	private PollerService			pollerService;
 
 
 	//Constructor
@@ -74,11 +74,11 @@ public class AdministratorService {
 		Assert.notNull(id);
 		return this.administratorRepository.findOneUserAccount(id);
 	}
-	
+
 	public Poller bannedPoller(final int pollerId) {
 		Assert.notNull(pollerId);
 		Assert.isTrue(this.pollerService.exists(pollerId));
-		Poller poller = pollerService.findOne(pollerId);
+		final Poller poller = this.pollerService.findOne(pollerId);
 		final UserAccount account = poller.getUserAccount();
 		account.setBanned(true);
 		poller.setUserAccount(account);
@@ -89,12 +89,18 @@ public class AdministratorService {
 	public Poller readmitPoller(final int pollerId) {
 		Assert.notNull(pollerId);
 		Assert.isTrue(this.pollerService.exists(pollerId));
-		Poller poller = pollerService.findOne(pollerId);
+		final Poller poller = this.pollerService.findOne(pollerId);
 		final UserAccount account = poller.getUserAccount();
 		account.setBanned(false);
 		poller.setUserAccount(account);
 
 		return this.pollerService.save(poller);
+	}
+
+	public Administrator saveAF(final Administrator administrator) {
+		Assert.notNull(administrator);
+
+		return this.administratorRepository.saveAndFlush(administrator);
 	}
 
 }
