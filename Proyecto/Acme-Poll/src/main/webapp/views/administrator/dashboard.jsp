@@ -54,7 +54,26 @@
 		
 		
 		<br/><br/>
-		
-		<spring:message code="dashboard.findPollWithHintsAbogeAverage" var="dash1" />	
+		<spring:message code="dashboard.avgChirpActor" var="dash1" />	
 		<h4><jstl:out value="${dash1}" />:</h4>
-		<jstl:out value="${findPollWithHintsAbogeAverage}" />	
+		<jstl:forEach var="c" items="${avgChirpActor}" varStatus="loop">
+		<jstl:out value="${c[0].name}" />:<jstl:out value="${c[1]}," />	
+		</jstl:forEach>
+		
+		<br/><br/>
+		
+		<spring:message code="dashboard.actorsAboveAvg" var="dash1" />	
+		<h4><jstl:out value="${dash1}" />:</h4>
+		<jstl:if test="${actorsAboveAvgChirp.size()==0}">
+		<jstl:out value="0"/>
+		</jstl:if>
+		<jstl:if test="${actorsAboveAvgChirp.size()>0}">
+		<jstl:forEach var="c" items="${actorsAboveAvgChirp}" varStatus="loop">
+			<jstl:out value="${c}"/>
+			<jstl:if test="${!loop.last}">, </jstl:if> 
+		</jstl:forEach>
+		</jstl:if>
+		<br />
+		
+
+		

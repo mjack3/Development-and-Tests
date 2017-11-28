@@ -114,7 +114,10 @@
   		<property name="phone" value="+34 (34) 5654554" />
   		<property name="address" value="11560" />
   		 <property name="chirps" >
-  			<list></list>
+  			<list>
+  			<ref bean="chirp1"/>
+  			<ref bean="chirp2"/>
+  			</list>
   		</property>
  	</bean>
  	
@@ -126,7 +129,10 @@
   		<property name="phone" value="+56 (213) 54554" />
   		<property name="address" value="11560" />
   		<property name="chirps" >
-  			<list></list>
+  			<list>
+  				<ref bean="chirp3"/>
+  			
+  			</list>
   		</property>
  	</bean>
  	
@@ -919,6 +925,28 @@
 			</list>
 		</property>
 		<property name="mark" value="7.0"/>
+	</bean>
+	
+	
+	<bean id="chirp1" class="domain.Chirp">
+	<property name="momentWritten" value="12/08/2016"/>
+	<property name="text" value="Hello world"/>
+	
+	
+	</bean>
+	
+	<bean id="chirp2" class="domain.Chirp">
+	<property name="momentWritten" value="12/08/2016"/>
+	<property name="text" value="Hello world 2"/>
+	
+	
+	</bean>
+	
+	<bean id="chirp3" class="domain.Chirp">
+	<property name="momentWritten" value="12/08/2016"/>
+	<property name="text" value="Hello world 2"/>
+	
+	
 	</bean>
 	
 	<bean id="validPeriod" class="domain.ValidPeriod">

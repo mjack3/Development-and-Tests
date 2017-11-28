@@ -38,6 +38,9 @@
 		<value>/views/question/messages</value>
 		<value>/views/validPeriod/messages</value>
 		
+		<value>/views/actor/messages</value>
+		
+		
 		
 	</util:list>
 

@@ -1,6 +1,7 @@
 
 package services;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -15,13 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import repositories.PollRepository;
+import domain.Actor;
 import domain.Answer;
 import domain.Hint;
 import domain.Instance;
 import domain.Poll;
 import domain.Poller;
 import domain.Question;
+import repositories.PollRepository;
 
 @Service
 @Transactional
@@ -119,9 +121,9 @@ public class PollService {
 	public Poll update(final Poll arg0) {
 		Assert.notNull(arg0);
 		Assert.isTrue(this.pollRepository.exists(arg0.getId()));
-//		Poll pollFind = pollRepository.findOne(arg0.getId());
-//		arg0.setQuestions(pollFind.getQuestions());
-//		arg0.setHints(pollFind.getHints());
+		//		Poll pollFind = pollRepository.findOne(arg0.getId());
+		//		arg0.setQuestions(pollFind.getQuestions());
+		//		arg0.setHints(pollFind.getHints());
 		return this.pollRepository.save(arg0);
 	}
 
@@ -169,49 +171,49 @@ public class PollService {
 
 		return resfinal;
 	}
-	
-	
 
 	public String findMinAvgMaxHintsByPoll() {
-		Object[] resultados = pollRepository.findMinAvgMaxHintsByPoll();
-		String res = "Min: " + resultados[0].toString() + ", Media: " + resultados[1].toString() 
-				+ ", Max:" + resultados[2].toString();
+		final Object[] resultados = this.pollRepository.findMinAvgMaxHintsByPoll();
+		final String res = "Min: " + resultados[0].toString() + ", Media: " + resultados[1].toString() + ", Max:" + resultados[2].toString();
 		return res;
 	}
 
 	public String findPollWithMoreHints() {
-		List<Poll> polls=pollRepository.findPollWithMoreHints();
+		final List<Poll> polls = this.pollRepository.findPollWithMoreHints();
 		String res = "";
-		
-		for(Poll p: polls) {
+
+		for (final Poll p : polls)
 			res = res + p.getTitle() + ", ";
-		}
-		res=res.substring(0, res.length()-2);
+		res = res.substring(0, res.length() - 2);
 		return res;
 	}
 
 	public String findPollWithFewerHints() {
-		List<Poll> polls=pollRepository.findPollWithFewerHints();
+		final List<Poll> polls = this.pollRepository.findPollWithFewerHints();
 		String res = "";
-		
-		for(Poll p: polls) {
+
+		for (final Poll p : polls)
 			res = res + p.getTitle() + ", ";
-		}
-		res=res.substring(0, res.length()-2);
+		res = res.substring(0, res.length() - 2);
 		return res;
 	}
 
 	public String findPollWithHintsAbogeAverage() {
-		List<Poll> polls=pollRepository.findPollWithHintsAbogeAverage();
+		final List<Poll> polls = this.pollRepository.findPollWithHintsAbogeAverage();
 		String res = "";
-		
-		for(Poll p: polls) {
+
+		for (final Poll p : polls)
 			res = res + p.getTitle() + ", ";
-		}
-		res=res.substring(0, res.length()-2);
+		res = res.substring(0, res.length() - 2);
 		return res;
 	}
-	
-	
+
+	public List<Array[]> avgChirps() {
+		return this.pollRepository.avgChirps();
+	}
+
+	public List<Actor> actorsAboveAvg() {
+		return this.pollRepository.actorsAboveAvg();
+	}
 
 }

@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import domain.Administrator;
 import services.AdministratorService;
 import services.PollService;
-import domain.Administrator;
 
 @RequestMapping("/administrator")
 @Controller
 public class AdministratorController {
 
 	@Autowired
-	private AdministratorService administratorService;
+	private AdministratorService	administratorService;
 	@Autowired
-	private PollService pollService;
+	private PollService				pollService;
 
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -54,26 +54,26 @@ public class AdministratorController {
 			}
 		return result;
 	}
-	
-	
+
 	@RequestMapping(value = "/dashboard", method = RequestMethod.GET)
 	public ModelAndView list() {
 
 		ModelAndView result;
 		result = new ModelAndView("administrator/dashboard");
-		
-		result.addObject("findMinAvgStdMaxPollsByPoller",pollService.findMinAvgStdMaxPollsByPoller()
-				);
-		result.addObject("findMinAvgStdMaxInstancesByPoll",
-				pollService.findMinAvgStdMaxInstancesByPoll());
-		
-		result.addObject("findMinAvgStdMaxQuestionByPoll", pollService.findMinAvgStdMaxQuestionByPoll());
-		
-		result.addObject("findMinAvgMaxHintsByPoll", pollService.findMinAvgMaxHintsByPoll());
-		result.addObject("findPollWithMoreHints", pollService.findPollWithMoreHints());
-		result.addObject("findPollWithFewerHints", pollService.findPollWithFewerHints());
-		result.addObject("findPollWithHintsAbogeAverage", pollService.findPollWithHintsAbogeAverage());
-		
+
+		result.addObject("findMinAvgStdMaxPollsByPoller", this.pollService.findMinAvgStdMaxPollsByPoller());
+		result.addObject("findMinAvgStdMaxInstancesByPoll", this.pollService.findMinAvgStdMaxInstancesByPoll());
+
+		result.addObject("findMinAvgStdMaxQuestionByPoll", this.pollService.findMinAvgStdMaxQuestionByPoll());
+
+		result.addObject("findMinAvgMaxHintsByPoll", this.pollService.findMinAvgMaxHintsByPoll());
+		result.addObject("findPollWithMoreHints", this.pollService.findPollWithMoreHints());
+		result.addObject("findPollWithFewerHints", this.pollService.findPollWithFewerHints());
+		result.addObject("findPollWithHintsAbogeAverage", this.pollService.findPollWithHintsAbogeAverage());
+
+		result.addObject("avgChirpActor", this.pollService.avgChirps());
+		result.addObject("actorsAboveAvgChirp", this.pollService.actorsAboveAvg());
+
 		return result;
 
 	}
@@ -97,7 +97,5 @@ public class AdministratorController {
 
 		return result;
 	}
-	
-	
 
 }

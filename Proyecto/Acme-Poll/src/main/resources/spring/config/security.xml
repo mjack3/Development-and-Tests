@@ -54,7 +54,7 @@
 		
 		
 		<!-- Reme -->
-		
+	
 		<security:intercept-url pattern="/poll/list.do" access="permitAll" />
 		<security:intercept-url pattern="/poll/results.do" access="permitAll" />
 		<security:intercept-url pattern="/poller/view.do" access="permitAll" />
@@ -80,6 +80,14 @@
 		<security:intercept-url pattern="/question/listChoice.do" access="permitAll" />
 		<security:intercept-url pattern="/answer/**" access="permitAll" />
 		<security:intercept-url pattern="/validPeriod/administrator/**" access="hasRole('ADMINISTRATOR')" />
+		
+		<!-- CHIRPS -->
+		
+		<security:intercept-url pattern="/actor/list.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/chirp/actor/list.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/chirp/actor/mylist.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/chirp/actor/create.do" access="isAuthenticated()" />
+		<security:intercept-url pattern="/chirp/actor/save.do" access="isAuthenticated()" />
 		
 		<!-- Fin Reme -->
 
