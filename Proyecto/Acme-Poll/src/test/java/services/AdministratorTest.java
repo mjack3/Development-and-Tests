@@ -99,7 +99,7 @@ public class AdministratorTest extends AbstractTest {
 			},
 			// Estamos autenticados pero el user es incorrecto -> false
 			{
-				"admin", 999999, IllegalArgumentException.class
+				"admin", 999999, NullPointerException.class
 			}, {
 				// Si no estamos autentificados como admin -> false
 				null, 93, IllegalArgumentException.class
