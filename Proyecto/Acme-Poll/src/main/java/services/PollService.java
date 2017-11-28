@@ -61,6 +61,7 @@ public class PollService {
 
 	public Poll findOne(final Integer arg0) {
 		Assert.notNull(arg0);
+		Assert.isTrue(this.pollRepository.exists(arg0));
 		return this.pollRepository.findOne(arg0);
 	}
 

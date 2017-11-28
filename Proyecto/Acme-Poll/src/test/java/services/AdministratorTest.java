@@ -24,90 +24,90 @@ import utilities.AbstractTest;
 import domain.Administrator;
 
 @Transactional
-@ContextConfiguration(locations = { "classpath:spring/junit.xml" })
+@ContextConfiguration(locations = {
+	"classpath:spring/junit.xml"
+})
 @RunWith(SpringJUnit4ClassRunner.class)
 public class AdministratorTest extends AbstractTest {
 
 	@Autowired
-	private AdministratorService administratorService;
+	private AdministratorService	administratorService;
+
 
 	// Tests
 	// ====================================================
 
-	protected void editAdministratorTest(String username, String phone, Class<?> expected) {
+	protected void editAdministratorTest(final String username, final String phone, final Class<?> expected) {
 		Class<?> caught;
 
 		caught = null;
 		try {
-			authenticate(username);
-			Administrator Administrator = administratorService.findActorByUsername(LoginService
-					.getPrincipal().getId());
+			this.authenticate(username);
+			final Administrator Administrator = this.administratorService.findActorByUsername(LoginService.getPrincipal().getId());
 			Administrator.setPhone(phone);
-			administratorService.saveAF(Administrator);
-			unauthenticate();
+			this.administratorService.saveAF(Administrator);
+			this.unauthenticate();
 
-		} catch (Throwable oops) {
+		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
-		checkExceptions(expected, caught);
+		this.checkExceptions(expected, caught);
 
 	}
 
 	@Test
 	public void driverEditAdministrator() {
 
-		Object testingData[][] = {
+		final Object testingData[][] = {
 
-		{ "admin", "+34(68)687975531", null },
-		{ "admin", "abcd", ConstraintViolationException.class }
+			{
+				"admin", "+34(68)687975531", null
+			}, {
+				"admin", "abcd", ConstraintViolationException.class
+			}
 		};
 
-		for (int i = 0; i < testingData.length; i++) {
-			editAdministratorTest((String) testingData[i][0], (String) testingData[i][1],
-					(Class<?>) testingData[i][2]);
-		}
+		for (int i = 0; i < testingData.length; i++)
+			this.editAdministratorTest((String) testingData[i][0], (String) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
-	
-	protected void banPollerTest(String username,int pollerId, Class<?> expected) {
+
+	protected void banPollerTest(final String username, final int pollerId, final Class<?> expected) {
 		Class<?> caught;
 
 		caught = null;
 		try {
 
-			authenticate(username);
-			administratorService.bannedPoller(pollerId);
-			
-			unauthenticate();
+			this.authenticate(username);
+			this.administratorService.bannedPoller(pollerId);
 
-		} catch (Throwable oops) {
+			this.unauthenticate();
+
+		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
-		checkExceptions(expected, caught);
+		this.checkExceptions(expected, caught);
 
 	}
-	
+
 	@Test
 	public void driverBanPoller() {
 
-		Object testingData[][] = {
+		final Object testingData[][] = {
 			// El Administrator logueado todo correcto. -> true
 			{
-				"admin",90, null
+				"admin", 93, null
 			},
 			// Estamos autenticados pero el user es incorrecto -> false
 			{
-				"admin", 999999,IllegalArgumentException.class
+				"admin", 999999, IllegalArgumentException.class
 			}, {
 				// Si no estamos autentificados como admin -> false
-				null, 90, IllegalArgumentException.class
+				null, 93, IllegalArgumentException.class
 			}
 		};
 
-		for (int i = 0; i < testingData.length; i++) {
-			banPollerTest((String) testingData[i][0], (int) testingData[i][1],(Class<?>) testingData[i][2]);
-		}
+		for (int i = 0; i < testingData.length; i++)
+			this.banPollerTest((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
-	
-	
 
 }

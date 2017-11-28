@@ -1,6 +1,7 @@
 
 package services;
 
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -10,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import repositories.ChirpRepository;
+import security.Authority;
+import security.LoginService;
 import domain.Actor;
 import domain.Administrator;
 import domain.Chirp;
 import domain.Poller;
-import repositories.ChirpRepository;
-import security.Authority;
-import security.LoginService;
 
 @Service
 @Transactional
@@ -34,6 +35,9 @@ public class ChirpService {
 
 	@Autowired
 	private LoginService			loginService;
+
+	@Autowired
+	private ActorService			actorService;
 
 
 	//Constructor
@@ -65,6 +69,8 @@ public class ChirpService {
 	}
 
 	public Chirp findOne(final int id) {
+		Assert.isTrue(LoginService.isAnyAuthenticated());
+		Assert.isTrue(this.chirpRepository.exists(id));
 		return this.chirpRepository.findOne(id);
 	}
 
@@ -90,6 +96,15 @@ public class ChirpService {
 
 	public List<Actor> actorChirps() {
 		return this.chirpRepository.actorChirps();
+	}
+
+	public Collection<Chirp> findAllPrincipal() {
+		// TODO Auto-generated method stub
+		Assert.isTrue(LoginService.isAnyAuthenticated());
+		final Actor actor = this.actorService.findOnePrincipal(LoginService.getPrincipal().getId());
+
+		return actor.getChirps();
+
 	}
 
 	//Other Methods

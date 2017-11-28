@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.AdministratorRepository;
+import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
 import domain.Poller;
@@ -77,6 +78,7 @@ public class AdministratorService {
 
 	public Poller bannedPoller(final int pollerId) {
 		Assert.notNull(pollerId);
+		Assert.isTrue(LoginService.hasRole("ADMINISTRATOR"));
 		Assert.isTrue(this.pollerService.exists(pollerId));
 		final Poller poller = this.pollerService.findOne(pollerId);
 		final UserAccount account = poller.getUserAccount();
@@ -88,6 +90,7 @@ public class AdministratorService {
 
 	public Poller readmitPoller(final int pollerId) {
 		Assert.notNull(pollerId);
+		Assert.isTrue(LoginService.hasRole("ADMINISTRATOR"));
 		Assert.isTrue(this.pollerService.exists(pollerId));
 		final Poller poller = this.pollerService.findOne(pollerId);
 		final UserAccount account = poller.getUserAccount();

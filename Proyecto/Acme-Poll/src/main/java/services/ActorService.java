@@ -9,11 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import repositories.ActorRepository;
+import security.LoginService;
 import domain.Actor;
 import domain.Administrator;
 import domain.Poller;
-import repositories.ActorRepository;
-import security.LoginService;
 
 @Service
 @Transactional
@@ -22,13 +22,13 @@ public class ActorService {
 	//Manager repositories
 
 	@Autowired
-	private ActorRepository actorRepository;
-	
+	private ActorRepository			actorRepository;
+
 	@Autowired
-	private AdministratorService administratorService;
-	
+	private AdministratorService	administratorService;
+
 	@Autowired
-	private PollerService pollerService;
+	private PollerService			pollerService;
 
 
 	//Constructor
@@ -39,45 +39,49 @@ public class ActorService {
 
 	//CRUD Methods
 
-	public void delete(Integer arg0) {
+	public void delete(final Integer arg0) {
 		Assert.notNull(arg0);
-		Assert.isTrue(actorRepository.exists(arg0));
-		actorRepository.delete(arg0);
+		Assert.isTrue(this.actorRepository.exists(arg0));
+		this.actorRepository.delete(arg0);
 	}
 
 	public List<Actor> findAll() {
-		return actorRepository.findAll();
+		return this.actorRepository.findAll();
 	}
 
-	public Actor findOne(Integer arg0) {
+	public Actor findOne(final Integer arg0) {
 		Assert.notNull(arg0);
-		Assert.isTrue(actorRepository.exists(arg0));
-		return actorRepository.findOne(arg0);
+		Assert.isTrue(this.actorRepository.exists(arg0));
+		return this.actorRepository.findOne(arg0);
 	}
 
-	public Actor save(Actor arg0) {
+	public Actor save(final Actor arg0) {
 		Assert.notNull(arg0);
-		return actorRepository.save(arg0);
+		return this.actorRepository.save(arg0);
 	}
-	
-	public Actor update(Actor arg0) {
+
+	public Actor update(final Actor arg0) {
 		Assert.notNull(arg0);
-		Assert.isTrue(actorRepository.exists(arg0.getId()));
-		return actorRepository.save(arg0);
+		Assert.isTrue(this.actorRepository.exists(arg0.getId()));
+		return this.actorRepository.save(arg0);
 	}
-	
-	public Actor getActual(){
-		Actor res=null;
-		
-		Administrator a= administratorService.findActorByUsername(LoginService.getPrincipal().getId());
-		Poller p = pollerService.findActorByUsername(LoginService.getPrincipal().getId());
-		
-		if(a!=null) {
+
+	public Actor getActual() {
+		Actor res = null;
+
+		final Administrator a = this.administratorService.findActorByUsername(LoginService.getPrincipal().getId());
+		final Poller p = this.pollerService.findActorByUsername(LoginService.getPrincipal().getId());
+
+		if (a != null)
 			res = a;
-		}else {
-			res=p;
-		}
-		
+		else
+			res = p;
+
 		return res;
+	}
+
+	public Actor findOnePrincipal(final int id) {
+		// TODO Auto-generated method stub
+		return this.actorRepository.findOnePrincipal(id);
 	}
 }

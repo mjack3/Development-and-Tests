@@ -21,6 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import utilities.AbstractTest;
 import domain.Hint;
+
 @Transactional
 @ContextConfiguration(locations = {
 	"classpath:spring/junit.xml"
@@ -30,151 +31,122 @@ public class HintTest extends AbstractTest {
 
 	@Autowired
 	private HintService	hintService;
-	
-	
-	// Tests
-		// ====================================================
 
-	
-	protected void writeHintTest(String username ,String text, int pollId, Class<?> expected) {
+
+	// Tests
+	// ====================================================
+
+	protected void writeHintTest(final String username, final String text, final int pollId, final Class<?> expected) {
 		Class<?> caught;
 
 		caught = null;
 		try {
 
-			
-			
-			authenticate(username);
-			Hint hint = hintService.create();
+			this.authenticate(username);
+			final Hint hint = this.hintService.create();
 			hint.setText(text);
-			hintService.save(hint, pollId);
-			unauthenticate();
-			
-			
+			this.hintService.save(hint, pollId);
+			this.unauthenticate();
 
-		} catch (Throwable oops) {
+		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
-		checkExceptions(expected, caught);
+		this.checkExceptions(expected, caught);
 
 	}
-	
+
 	@Test
 	public void driverWriteHint() {
 
-		Object testingData[][] = {
-			
+		final Object testingData[][] = {
+
 			{
-				"poller1","texto del hint",95, null
-			},
-			{
-				"poller1","",95, ConstraintViolationException.class
-			},
-			{
-				"poller1","texto del hint",951111, NullPointerException.class
-			},
-			{
-				null,"texto del hint",95, ConstraintViolationException.class
+				"poller1", "texto del hint", 98, null
+			}, {
+				"poller1", "", 98, ConstraintViolationException.class
+			}, {
+				"poller1", "texto del hint", 951111, ConstraintViolationException.class
+			}, {
+				null, "texto del hint", 98, ConstraintViolationException.class
 			}
 		};
 
-		for (int i = 0; i < testingData.length; i++) {
-			writeHintTest((String) testingData[i][0],(String) testingData[i][1],(int) testingData[i][2],(Class<?>) testingData[i][3]);
-		}
+		for (int i = 0; i < testingData.length; i++)
+			this.writeHintTest((String) testingData[i][0], (String) testingData[i][1], (int) testingData[i][2], (Class<?>) testingData[i][3]);
 	}
-	protected void scoreHintTest(String username ,int hintId, int score, Class<?> expected) {
+	protected void scoreHintTest(final String username, final int hintId, final int score, final Class<?> expected) {
 		Class<?> caught;
 
 		caught = null;
 		try {
 
-			
-			
-			authenticate(username);
-			hintService.score(hintId,score);
-			unauthenticate();
-			
-			
+			this.authenticate(username);
+			this.hintService.score(hintId, score);
+			this.unauthenticate();
 
-		} catch (Throwable oops) {
+		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
-		checkExceptions(expected, caught);
+		this.checkExceptions(expected, caught);
 
 	}
-	
+
 	@Test
 	public void driverScoreHint() {
 
-		Object testingData[][] = {
-			
+		final Object testingData[][] = {
+
 			{
-				"poller1",158,9, null
-			},
-			{
-				"poller1",1581111,9, NullPointerException.class
-			},
-			{
-				null,158,9, null
+				"poller1", 161, 9, null
+			}, {
+				"poller1", 1581111, 9, IllegalArgumentException.class
+			}, {
+				null, 161, 9, null
 			}
 		};
 
-		for (int i = 0; i < testingData.length; i++) {
-			scoreHintTest((String) testingData[i][0],(int) testingData[i][1],(int) testingData[i][2],(Class<?>) testingData[i][3]);
-		}
+		for (int i = 0; i < testingData.length; i++)
+			this.scoreHintTest((String) testingData[i][0], (int) testingData[i][1], (int) testingData[i][2], (Class<?>) testingData[i][3]);
 	}
-	
-	protected void deleteHintTest(String username,int hintId,int pollId, Class<?> expected) {
+
+	protected void deleteHintTest(final String username, final int hintId, final int pollId, final Class<?> expected) {
 		Class<?> caught;
 
 		caught = null;
 		try {
 
-			authenticate(username);
-			
-			hintService.remove(hintId, pollId);
-			unauthenticate();
+			this.authenticate(username);
 
-		} catch (Throwable oops) {
+			this.hintService.remove(hintId, pollId);
+			this.unauthenticate();
+
+		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
-		checkExceptions(expected, caught);
+		this.checkExceptions(expected, caught);
 
 	}
-	
+
 	@Test
 	public void driverDeleteHint() {
 
-		Object testingData[][] = {
+		final Object testingData[][] = {
 			// El Administrator logueado todo correcto. -> true
 			{
-				"admin",158, 95, null
-			},
-			{
-				"admin",1581111, 95, IllegalArgumentException.class
-			},
-			{
-				"admin",158, 95111, IllegalArgumentException.class
-			},
-			{
-				"admin",158, 115, IllegalArgumentException.class
-			},
-			{
-				null,1581111, 95, IllegalArgumentException.class
+				"admin", 161, 98, null
+			}, {
+				"admin", 1581111, 98, IllegalArgumentException.class
+			}, {
+				"admin", 161, 95111, IllegalArgumentException.class
+			}, {
+				"admin", 161, 98, IllegalArgumentException.class
+			}, {
+				null, 1581111, 98, IllegalArgumentException.class
 			}
 		};
 
-		for (int i = 0; i < testingData.length; i++) {
-			deleteHintTest((String) testingData[i][0], (int) testingData[i][1],(int) testingData[i][2],(Class<?>) testingData[i][3]);
-		}
+		for (int i = 0; i < testingData.length; i++)
+			this.deleteHintTest((String) testingData[i][0], (int) testingData[i][1], (int) testingData[i][2], (Class<?>) testingData[i][3]);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
