@@ -1,12 +1,8 @@
 
 package controllers;
 
-import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -42,15 +38,18 @@ public class AnswerController {
 		ModelAndView res;
 
 		res = new ModelAndView("answer/answer");
+		try {
+			final Poll poll = this.pollService.findOne(q);
+			this.toSave = q;
 
-		final Poll poll = this.pollService.findOne(q);
-		this.toSave = q;
-
-		res.addObject("question", poll.getQuestions());
+			res.addObject("question", poll.getQuestions());
+		} catch (final Throwable e) {
+			res = new ModelAndView("redirect:/welcome/index.do");
+		}
 
 		return res;
 	}
-	
+
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
 	public String save(final String data, final String gender, final String city, final String name) {
 
@@ -61,7 +60,6 @@ public class AnswerController {
 
 			final String[] answers = data.substring(1, data.length()).split(",");
 			final List<Answer> ansToSave = new LinkedList<Answer>();
-			
 
 			for (int i = 0; i < answers.length; i++) {
 				final Answer a = new Answer();
@@ -71,12 +69,12 @@ public class AnswerController {
 			}
 
 			//Se usa para diferenciar en la respuesta si ha respondido anteriormente esa encuesta
-			Object resultado = this.instanceService.save(ansToSave, p, city, gender, name);
-			if(resultado!=null)
+			final Object resultado = this.instanceService.save(ansToSave, p, city, gender, name);
+			if (resultado != null)
 				res = "poll/list";
 			else
-				res="poller/list";
-		} catch (Exception e) {
+				res = "poller/list";
+		} catch (final Exception e) {
 			res = "poll/list";
 		}
 		return res;

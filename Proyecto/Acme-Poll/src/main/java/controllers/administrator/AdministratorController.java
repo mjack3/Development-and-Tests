@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import domain.Administrator;
+import security.LoginService;
 import services.AdministratorService;
 import services.PollService;
 
@@ -23,16 +25,23 @@ public class AdministratorController {
 	private AdministratorService	administratorService;
 	@Autowired
 	private PollService				pollService;
+	@Autowired
+	private LoginService			loginService;
 
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(final int userAccountID) {
 		ModelAndView result;
-		Administrator admin;
+		try {
+			Administrator admin;
+			final Administrator adminlogin = (Administrator) this.loginService.findActorByUsername(LoginService.getPrincipal().getId());
 
-		admin = this.administratorService.findActorByUsername(userAccountID);
-
-		result = this.createEditModelAndView(admin);
+			admin = this.administratorService.findActorByUsername(userAccountID);
+			Assert.isTrue(admin.getId() == adminlogin.getId());
+			result = this.createEditModelAndView(admin);
+		} catch (final Throwable e) {
+			result = new ModelAndView("redirect:/welcome/index.do");
+		}
 
 		return result;
 	}

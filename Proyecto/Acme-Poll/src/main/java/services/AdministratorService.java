@@ -10,11 +10,11 @@ import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
+import domain.Administrator;
+import domain.Poller;
 import repositories.AdministratorRepository;
 import security.LoginService;
 import security.UserAccount;
-import domain.Administrator;
-import domain.Poller;
 
 @Service
 @Transactional
@@ -26,6 +26,8 @@ public class AdministratorService {
 	private AdministratorRepository	administratorRepository;
 	@Autowired
 	private PollerService			pollerService;
+	@Autowired
+	private LoginService			loginService;
 
 
 	//Constructor
@@ -42,6 +44,9 @@ public class AdministratorService {
 
 		if (this.exists(administrator.getId())) {
 			a = this.findOne(administrator.getId());
+			final Administrator adminlogin = (Administrator) this.loginService.findActorByUsername(LoginService.getPrincipal().getId());
+			Assert.isTrue(a.getId() == adminlogin.getId());
+
 			a.setName(administrator.getName());
 			a.setEmail(administrator.getEmail());
 			a.setPhone(administrator.getPhone());
@@ -78,8 +83,8 @@ public class AdministratorService {
 
 	public Poller bannedPoller(final int pollerId) {
 		Assert.notNull(pollerId);
-		Assert.isTrue(LoginService.hasRole("ADMINISTRATOR"));
-		Assert.isTrue(this.pollerService.exists(pollerId));
+		//Assert.isTrue(LoginService.hasRole("ADMINISTRATOR"));
+		//Assert.isTrue(this.pollerService.exists(pollerId));
 		final Poller poller = this.pollerService.findOne(pollerId);
 		final UserAccount account = poller.getUserAccount();
 		account.setBanned(true);
@@ -90,8 +95,8 @@ public class AdministratorService {
 
 	public Poller readmitPoller(final int pollerId) {
 		Assert.notNull(pollerId);
-		Assert.isTrue(LoginService.hasRole("ADMINISTRATOR"));
-		Assert.isTrue(this.pollerService.exists(pollerId));
+		//Assert.isTrue(LoginService.hasRole("ADMINISTRATOR"));
+		//Assert.isTrue(this.pollerService.exists(pollerId));
 		final Poller poller = this.pollerService.findOne(pollerId);
 		final UserAccount account = poller.getUserAccount();
 		account.setBanned(false);

@@ -21,8 +21,8 @@ import services.ValidPeriodService;
 public class PollController extends AbstractController {
 
 	@Autowired
-	private PollService	pollService;
-	
+	private PollService			pollService;
+
 	@Autowired
 	private ValidPeriodService	validPeriodService;
 
@@ -35,25 +35,28 @@ public class PollController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 
-		Date actualDate = Calendar.getInstance().getTime();
+		final Date actualDate = Calendar.getInstance().getTime();
 		result = new ModelAndView("poll/list");
 		result.addObject("requestURI", "poll/list.do");
-		final List<Poll> catalogue = pollService.findPollActivated();
+		final List<Poll> catalogue = this.pollService.findPollActivated();
 		result.addObject("poll", catalogue);
 		result.addObject("actualDate", actualDate);
-		result.addObject("validPeriod", validPeriodService.get().getMinimumPeriod());
+		result.addObject("validPeriod", this.validPeriodService.get().getMinimumPeriod());
 		return result;
 	}
-	
-	@RequestMapping(value = "/results", method = RequestMethod.GET)
-	public ModelAndView results(@RequestParam Integer q) {
-		ModelAndView result;
 
-		List<Integer> list = pollService.getResults(q);
-		
-		result = new ModelAndView("poll/results");
-		result.addObject("results", list);
-		result.addObject("question", pollService.findOne(q).getQuestions());
+	@RequestMapping(value = "/results", method = RequestMethod.GET)
+	public ModelAndView results(@RequestParam final Integer q) {
+		ModelAndView result;
+		try {
+			final List<Integer> list = this.pollService.getResults(q);
+
+			result = new ModelAndView("poll/results");
+			result.addObject("results", list);
+			result.addObject("question", this.pollService.findOne(q).getQuestions());
+		} catch (final Throwable e) {
+			result = new ModelAndView("redirect:/welcome/index.do");
+		}
 
 		return result;
 	}

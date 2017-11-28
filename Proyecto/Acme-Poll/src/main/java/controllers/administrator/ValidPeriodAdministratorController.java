@@ -1,3 +1,4 @@
+
 package controllers.administrator;
 
 import javax.validation.Valid;
@@ -18,38 +19,38 @@ import services.ValidPeriodService;
 public class ValidPeriodAdministratorController {
 
 	@Autowired
-	private AdministratorService administratorService;
-	
+	private AdministratorService	administratorService;
+
 	@Autowired
-	private ValidPeriodService validPeriodService;
-	
-	
+	private ValidPeriodService		validPeriodService;
+
+
 	@RequestMapping("/edit")
 	public ModelAndView list() {
 		ModelAndView res;
 
 		res = new ModelAndView("validPeriod/edit");
-		
-		res.addObject("validPeriod", validPeriodService.get());
+
+		res.addObject("validPeriod", this.validPeriodService.get());
 
 		return res;
 	}
-	
-	@RequestMapping(value="/save", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid ValidPeriod validPeriod, final BindingResult binding) {
+
+	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid final ValidPeriod validPeriod, final BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors()) {
-			result = new ModelAndView("validPeriod/edit");			
+			result = new ModelAndView("validPeriod/edit");
 			result.addObject("validPeriod", validPeriod);
 		} else
 			try {
 				this.validPeriodService.save(validPeriod);
 				result = new ModelAndView("redirect:/welcome/index.do");
 			} catch (final Throwable th) {
-				result = new ModelAndView("validPeriod/edit");			
+				result = new ModelAndView("validPeriod/edit");
 				result.addObject("validPeriod", validPeriod);
 			}
 		return result;
 	}
-	
+
 }

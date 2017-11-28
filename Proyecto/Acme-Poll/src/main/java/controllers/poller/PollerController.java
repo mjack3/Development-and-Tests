@@ -5,6 +5,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import controllers.AbstractController;
 import domain.Poller;
+import security.LoginService;
 import services.PollerService;
 
 @Controller
@@ -20,7 +22,9 @@ import services.PollerService;
 public class PollerController extends AbstractController {
 
 	@Autowired
-	private PollerService pollerService;
+	private PollerService	pollerService;
+	@Autowired
+	private LoginService	loginService;
 
 
 	/*
@@ -41,14 +45,19 @@ public class PollerController extends AbstractController {
 	public ModelAndView view(final Integer pollId) {
 		ModelAndView result;
 
-		result = new ModelAndView("poller/view");
+		try {
+			result = new ModelAndView("poller/view");
 
-		final Poller p = this.pollerService.findPollerFromPoll(pollId);
-		
-		result.addObject("poller", p);
+			final Poller p = this.pollerService.findPollerFromPoll(pollId);
 
-		System.out.println(p);
-		System.out.println(pollId);
+			result.addObject("poller", p);
+
+			System.out.println(p);
+			System.out.println(pollId);
+		} catch (final Throwable e) {
+			result = new ModelAndView("redirect:/welcome/index.do");
+
+		}
 
 		return result;
 	}
@@ -57,22 +66,26 @@ public class PollerController extends AbstractController {
 	public ModelAndView edit(final int userAccountID) {
 		ModelAndView result;
 		Poller poller;
+		try {
+			poller = this.pollerService.findActorByUsername(userAccountID);
+			final Poller pollerlogin = (Poller) this.loginService.findActorByUsername(LoginService.getPrincipal().getId());
+			Assert.isTrue(pollerlogin.getId() == poller.getId());
+			result = this.createEditModelAndView(poller);
+		} catch (final Throwable e) {
+			result = new ModelAndView("redirect:/welcome/index.do");
 
-		poller = this.pollerService.findActorByUsername(userAccountID);
-
-		result = this.createEditModelAndView(poller);
+		}
 
 		return result;
 	}
 
 	@RequestMapping(value = "/save-poller", method = RequestMethod.POST, params = "save")
-	public ModelAndView savePoller(@Valid Poller poller, BindingResult binding) {
+	public ModelAndView savePoller(@Valid final Poller poller, final BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors()) {
-			for ( ObjectError e : binding.getAllErrors()) {
+			for (final ObjectError e : binding.getAllErrors())
 				System.out.println(e.toString());
-			}
-				
+
 			result = this.createEditModelAndView(poller, "poller.commit.error");
 		} else
 			try {

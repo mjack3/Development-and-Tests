@@ -1,3 +1,4 @@
+
 package controllers.poller;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,20 +17,24 @@ public class HintPollerController {
 	@Autowired
 	private PollService pollService;
 
-	
+
 	@RequestMapping("/list")
-	public ModelAndView list(@RequestParam Integer q) {
+	public ModelAndView list(@RequestParam final Integer q) {
 		ModelAndView res;
 
-		res = new ModelAndView("hint/list");
-		
-		Poll poll = pollService.findOne(q);
-		
-		res.addObject("hint", poll.getHints());
-		res.addObject("pollId", q);
+		try {
+			res = new ModelAndView("hint/list");
+
+			final Poll poll = this.pollService.findOne(q);
+
+			res.addObject("hint", poll.getHints());
+			res.addObject("pollId", q);
+		} catch (final Throwable e) {
+			res = new ModelAndView("redirect:/welcome/index.do");
+
+		}
 
 		return res;
 	}
-	
-	
+
 }

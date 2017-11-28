@@ -1,23 +1,21 @@
+
 package controllers.poller;
 
 import java.util.Calendar;
-import java.util.LinkedList;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Hint;
 import domain.Poll;
 import domain.Poller;
-import domain.Question;
 import security.LoginService;
 import services.PollService;
 import services.PollerService;
@@ -28,11 +26,11 @@ import services.ValidPeriodService;
 public class PollPollerController {
 
 	@Autowired
-	private PollerService pollerService;
+	private PollerService		pollerService;
 
 	@Autowired
-	private PollService pollService;
-	
+	private PollService			pollService;
+
 	@Autowired
 	private ValidPeriodService	validPeriodService;
 
@@ -43,67 +41,72 @@ public class PollPollerController {
 
 		res = new ModelAndView("poll/list");
 
-		Poller poller = pollerService.findActorByUsername(LoginService.getPrincipal().getId());
+		final Poller poller = this.pollerService.findActorByUsername(LoginService.getPrincipal().getId());
 
 		res.addObject("poll", poller.getPolls());
 		res.addObject("actualDate", Calendar.getInstance().getTime());
-		res.addObject("validPeriod", validPeriodService.get().getMinimumPeriod());
+		res.addObject("validPeriod", this.validPeriodService.get().getMinimumPeriod());
 
 		return res;
 	}
 
-
 	@RequestMapping("/remove")
-	public ModelAndView remove(@RequestParam Integer q) {
+	public ModelAndView remove(@RequestParam final Integer q) {
 
 		try {
-			Poll poll = pollService.findOne(q);
-			pollService.delete(poll);
-			return list();
-		}catch (Exception e) {
-			return list();
+			final Poll poll = this.pollService.findOne(q);
+			this.pollService.delete(poll);
+			return this.list();
+		} catch (final Exception e) {
+			return this.list();
 		}
 
 	}
 
 	@RequestMapping("/edit")
-	public ModelAndView edit(@RequestParam Integer q) {
+	public ModelAndView edit(@RequestParam final Integer q) {
 		ModelAndView res;
 
-		res = new ModelAndView("poll/edit");
+		try {
+			res = new ModelAndView("poll/edit");
+			final Poller poller = this.pollerService.findActorByUsername(LoginService.getPrincipal().getId());
 
-		Poll poll = pollService.findOne(q);
+			final Poll poll = this.pollService.findOne(q);
+			Assert.isTrue(poller.getPolls().contains(poll));
 
-		res.addObject("poll", poll);
+			res.addObject("poll", poll);
+		} catch (final Throwable e) {
+			res = new ModelAndView("redirect:/welcome/index.do");
+		}
 
 		return res;
 
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Poll poll,BindingResult binding) {
-		ModelAndView res= null;
-		
+	public ModelAndView save(@Valid final Poll poll, final BindingResult binding) {
+		ModelAndView res = null;
+
 		if (binding.hasErrors()) {
 			res = new ModelAndView("poll/edit");
 			res.addObject("poll", poll);
-		} else {
+		} else
 			try {
-				
-				if(poll.getStartDate().after(poll.getEndDate())) {
+
+				if (poll.getStartDate().after(poll.getEndDate())) {
 					binding.rejectValue("startDate", "error.startDate", "error");
 					throw new IllegalArgumentException();
 				}
-								
-				
-				pollService.update(poll);
+				final Poller poller = this.pollerService.findActorByUsername(LoginService.getPrincipal().getId());
+				Assert.isTrue(poller.getPolls().contains(poll));
+
+				this.pollService.update(poll);
 				res = new ModelAndView("redirect:list.do");
 				res.addObject("poll", poll);
-			}catch (Exception e) {
+			} catch (final Exception e) {
 				res = new ModelAndView("poll/edit");
 				res.addObject("poll", poll);
 			}
-		}
 		return res;
 	}
 
