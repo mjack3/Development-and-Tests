@@ -14,12 +14,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Poll;
-import domain.Poller;
 import security.LoginService;
 import services.PollService;
 import services.PollerService;
 import services.ValidPeriodService;
+import domain.Poll;
+import domain.Poller;
 
 @Controller
 @RequestMapping("/poll/poller")
@@ -46,7 +46,7 @@ public class PollPollerController {
 		res.addObject("poll", poller.getPolls());
 		res.addObject("actualDate", Calendar.getInstance().getTime());
 		res.addObject("validPeriod", this.validPeriodService.get().getMinimumPeriod());
-		result.addObject("isPoller", true);
+		res.addObject("isPoller", true);
 
 		return res;
 	}
@@ -89,6 +89,7 @@ public class PollPollerController {
 		ModelAndView res = null;
 
 		if (binding.hasErrors()) {
+
 			res = new ModelAndView("poll/edit");
 			res.addObject("poll", poll);
 		} else

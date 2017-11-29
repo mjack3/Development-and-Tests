@@ -1,3 +1,4 @@
+
 package controllers.administrator;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,45 +15,45 @@ import services.PollerService;
 public class PollerAdministratorController {
 
 	@Autowired
-	private PollerService pollerService;
-	
-	@Autowired
-	private AdministratorService administratorService;
+	private PollerService			pollerService;
 
-	
+	@Autowired
+	private AdministratorService	administratorService;
+
+
 	@RequestMapping("/list")
 	public ModelAndView list() {
 		ModelAndView res;
 
 		res = new ModelAndView("poller/list");
-		
-		res.addObject("poller", pollerService.findAll());
-		res.addObject("bannedPollers", pollerService.pollersBanned());
-		result.addObject("isPoller", false);
+
+		res.addObject("poller", this.pollerService.findAll());
+		res.addObject("bannedPollers", this.pollerService.pollersBanned());
+		res.addObject("isPoller", false);
 
 		return res;
 	}
-	
+
 	@RequestMapping("/banned")
-	public ModelAndView banned(@RequestParam int q) {
-		
+	public ModelAndView banned(@RequestParam final int q) {
+
 		try {
-			administratorService.bannedPoller(q);
-			return list();
-		}catch (Exception e) {
-			return list();
+			this.administratorService.bannedPoller(q);
+			return this.list();
+		} catch (final Exception e) {
+			return this.list();
 		}
 
 	}
-	
+
 	@RequestMapping("/readmit")
-	public ModelAndView readmit(@RequestParam int q) {
-		
+	public ModelAndView readmit(@RequestParam final int q) {
+
 		try {
-			administratorService.readmitPoller(q);
-			return list();
-		}catch (Exception e) {
-			return list();
+			this.administratorService.readmitPoller(q);
+			return this.list();
+		} catch (final Exception e) {
+			return this.list();
 		}
 
 	}
