@@ -75,15 +75,15 @@ public class Poll extends DomainEntity {
 	public void setBanner(final String banner) {
 		this.banner = banner;
 	}
-	
+
 	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getEndDate() {
-		return endDate;
+		return this.endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(final Date endDate) {
 		this.endDate = endDate;
 	}
 
@@ -93,7 +93,6 @@ public class Poll extends DomainEntity {
 	public Date getStartDate() {
 		return this.startDate;
 	}
-
 
 	public void setStartDate(final Date startDate) {
 		this.startDate = startDate;
@@ -106,7 +105,7 @@ public class Poll extends DomainEntity {
 	private Collection<Question>	questions;
 	private Collection<Instance>	instances;
 	private Poller					poller;
-	private Collection<Hint>	    hints;
+	private Collection<Hint>		hints;
 
 
 	@NotNull
@@ -143,13 +142,11 @@ public class Poll extends DomainEntity {
 	@NotNull
 	@OneToMany
 	public Collection<Hint> getHints() {
-		return hints;
+		return this.hints;
 	}
 
-	public void setHints(Collection<Hint> hints) {
+	public void setHints(final Collection<Hint> hints) {
 		this.hints = hints;
 	}
-	
-	
 
 }

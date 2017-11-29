@@ -2,6 +2,7 @@
 package controllers.poller;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import javax.validation.Valid;
 
@@ -95,7 +96,17 @@ public class PollPollerController {
 		} else
 			try {
 
-				if (poll.getStartDate().after(poll.getEndDate())) {
+				final Date d = new Date();
+				d.setHours(0);
+				d.setMinutes(0);
+				d.setSeconds(0);
+
+				if (poll.getStartDate().before(d)) {
+					binding.rejectValue("startDate", "error.startDate1", "error");
+					throw new IllegalArgumentException();
+				}
+
+				else if (poll.getStartDate().after(poll.getEndDate())) {
 					binding.rejectValue("startDate", "error.startDate", "error");
 					throw new IllegalArgumentException();
 				}
@@ -111,5 +122,4 @@ public class PollPollerController {
 			}
 		return res;
 	}
-
 }
