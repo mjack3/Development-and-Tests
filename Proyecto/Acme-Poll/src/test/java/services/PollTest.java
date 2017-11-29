@@ -161,13 +161,13 @@ public class PollTest extends AbstractTest {
 		final Object testingData[][] = {
 
 			{
-				"poller1", 128, null
+				"poller1", 150, null
 			},
 
 			{
 				"poller1", 123333, IllegalArgumentException.class
 			}, {
-				"auditor1", 128, IllegalArgumentException.class
+				"auditor1", 1282, IllegalArgumentException.class
 			}
 
 		};
@@ -175,5 +175,4 @@ public class PollTest extends AbstractTest {
 		for (int i = 0; i < testingData.length; i++)
 			this.deletePollTest((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);
 	}
-
 }

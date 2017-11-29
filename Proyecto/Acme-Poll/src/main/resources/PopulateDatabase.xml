@@ -176,12 +176,12 @@
  	<!-- POLLS -->
  	
  	<bean id="poll1" class="domain.Poll">
- 		<property name="title" value="titlePoll1" />
+ 		<property name="title" value="Poll1 comenzada" />
  		<property name="ticket" value="aa-11111" />
  		<property name="description" value="descriptionPoll1" />
  		<property name="banner" value="https://lihembensayel.files.wordpress.com/2013/09/imagen1.jpg?w=833" />
- 		<property name="startDate" value="12/12/2017" />
- 		<property name="endDate" value="15/08/2018" />
+ 		<property name="startDate" value="12/12/2015" />
+ 		<property name="endDate" value="15/08/2019" />
  		<property name="poller" ref="poller1"/>
  		<property name="hints" >
   			<list>
@@ -365,12 +365,12 @@
  	
  	
  	<bean id="poll2" class="domain.Poll">
- 		<property name="title" value="titlePoll2" />
+ 		<property name="title" value="Poll2 terminada" />
  		<property name="ticket" value="aa-22222" />
  		<property name="description" value="descriptionPoll2" />
  		<property name="banner" value="https://lihembensayel.files.wordpress.com/2013/09/imagen1.jpg?w=833" />
  		<property name="startDate" value="11/08/1992" />
- 		<property name="endDate" value="11/08/2018" />
+ 		<property name="endDate" value="11/08/2000" />
  		<property name="poller" ref="poller1"/>
  		<property name="hints" >
   			<list>
@@ -485,13 +485,13 @@
  	
  	
  	<bean id="poll3" class="domain.Poll">
- 		<property name="title" value="titlePoll3" />
+ 		<property name="title" value="Poll3 comenzada" />
  		<property name="ticket" value="aa-33333" />
  		<property name="description" value="descriptionPoll3" />
  		<property name="banner" value="https://lihembensayel.files.wordpress.com/2013/09/imagen1.jpg?w=833" />
  		<property name="startDate" value="12/12/2017" />
- 		<property name="endDate" value="11/08/2018" />
- 		<property name="poller" ref="poller1"/>
+ 		<property name="endDate" value="11/08/2019" />
+ 		<property name="poller" ref="poller2"/>
  		<property name="hints" >
   			<list>
   				<ref bean="hint5"/>
@@ -639,12 +639,12 @@
  	
  	
  	<bean id="poll4" class="domain.Poll">
- 		<property name="title" value="titulo: Poll pon pocas respuestas" />
+ 		<property name="title" value="titulo: Poll4 acabado" />
  		<property name="ticket" value="bb-11111" />
  		<property name="description" value="Poll sin respuestas" />
  		<property name="banner" value="https://lihembensayel.files.wordpress.com/2013/09/imagen1.jpg?w=833" />
  		<property name="startDate" value="11/08/1992" />
- 		<property name="endDate" value="11/08/2018" />
+ 		<property name="endDate" value="11/08/2015" />
  		<property name="poller" ref="poller2"/>
  		<property name="hints" >
   			<list></list>
@@ -663,12 +663,12 @@
  	
  	
  	<bean id="poll5" class="domain.Poll">
- 		<property name="title" value="titulo: Poll sin respuestas" />
+ 		<property name="title" value="titulo: Poll5 sin comenzar" />
  		<property name="ticket" value="cc-11111" />
  		<property name="description" value="Poll sin respuestas" />
  		<property name="banner" value="https://lihembensayel.files.wordpress.com/2013/09/imagen1.jpg?w=833" />
- 		<property name="startDate" value="11/12/2017" />
- 		<property name="endDate" value="11/08/2018" />
+ 		<property name="startDate" value="11/12/2020" />
+ 		<property name="endDate" value="11/08/2021" />
  		<property name="poller" ref="poller2"/>
  		<property name="hints" >
   			<list></list>
@@ -686,13 +686,13 @@
  	
  	
  	<bean id="poll6" class="domain.Poll">
- 		<property name="title" value="titulo: Poll sin comenzar" />
+ 		<property name="title" value="titulo: Poll6 sin comenzar" />
  		<property name="ticket" value="dd-11111" />
  		<property name="description" value="Poll sin respuestas" />
  		<property name="banner" value="https://lihembensayel.files.wordpress.com/2013/09/imagen1.jpg?w=833" />
- 		<property name="startDate" value="11/08/2019" />
- 		<property name="endDate" value="11/08/2020" />
- 		<property name="poller" ref="poller5"/>
+ 		<property name="startDate" value="11/08/2020" />
+ 		<property name="endDate" value="11/08/2021" />
+ 		<property name="poller" ref="poller1"/>
  		<property name="hints" >
   			<list></list>
   		</property>
