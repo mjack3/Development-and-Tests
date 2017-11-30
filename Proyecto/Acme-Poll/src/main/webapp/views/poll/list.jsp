@@ -60,11 +60,7 @@
 
 	<security:authorize access="permitAll() && !hasRole('POLLER')">
 
-		<display:column>
-			<a href="question/list.do?q=${row.id}"> <spring:message
-					code="poll.questions" />
-			</a>
-		</display:column>
+		
 
 		<display:column>
 			<a href="poller/view.do?pollId=${row.id}"> <spring:message
@@ -92,12 +88,7 @@
 
 	<security:authorize access="hasRole('POLLER')">
 
-		<display:column>
-			<a href="question/poller/list.do?q=${row.id}"> <spring:message
-					code="poll.questions" />
-			</a>
-		</display:column>
-
+		
 		<display:column>
 			<a href="poller/view.do?pollId=${row.id}"> <spring:message
 					code="poll.poller" />

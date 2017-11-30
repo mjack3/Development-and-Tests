@@ -1,7 +1,6 @@
 
 package domain;
 
-import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.Access;
@@ -9,12 +8,10 @@ import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Range;
 
 @Entity
@@ -24,9 +21,10 @@ public class Question extends DomainEntity {
 	public Question() {
 	}
 
-	private Integer				number;
-	private String				statment;
-	private List<String>		choices;
+
+	private Integer			number;
+	private String			statment;
+	private List<String>	choices;
 
 
 	@NotBlank
@@ -39,28 +37,30 @@ public class Question extends DomainEntity {
 	}
 
 	@NotNull
-	@Range(min=1)
+	@Range(min = 1)
 	public Integer getNumber() {
-		return number;
+		return this.number;
 	}
 
-	public void setNumber(Integer number) {
+	public void setNumber(final Integer number) {
 		this.number = number;
 	}
 
 	@NotNull
-	@ElementCollection(targetClass=String.class)
+	@ElementCollection(targetClass = String.class)
 	public List<String> getChoices() {
-		return choices;
+		return this.choices;
 	}
 
-	public void setChoices(List<String> choices) {
+	public void setChoices(final List<String> choices) {
 		this.choices = choices;
 	}
+
 
 	// Relathionships	--------
 
 	private Poll	poll;
+
 
 	@NotNull
 	@Valid
@@ -72,8 +72,5 @@ public class Question extends DomainEntity {
 	public void setPoll(final Poll poll) {
 		this.poll = poll;
 	}
-
-
-
 
 }
