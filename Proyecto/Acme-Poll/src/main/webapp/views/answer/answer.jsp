@@ -20,7 +20,7 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-
+Page hit counter: <b> ${cookie.hitCounter.value} </b><br/>
 
 <b><spring:message code="answer.name" /></b>
 <input type="text" class="form-control" style="width: 30%;" name="name" id="name">

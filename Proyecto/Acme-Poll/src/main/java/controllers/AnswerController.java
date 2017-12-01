@@ -4,18 +4,22 @@ package controllers;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Answer;
-import domain.Poll;
 import services.ActorService;
 import services.InstanceService;
 import services.PollService;
+import domain.Answer;
+import domain.Poll;
 
 @Controller
 @RequestMapping("/answer")
@@ -34,9 +38,28 @@ public class AnswerController {
 
 
 	@RequestMapping("/answer")
-	public ModelAndView answer(@RequestParam final Integer q) {
+	public ModelAndView answer(@RequestParam final Integer q, @CookieValue(value = "hitCounter", defaultValue = "") String hitCounter, final HttpServletResponse response) {
 		ModelAndView res;
 
+		/*
+		 * Se añade la cabeceras @coockieValue y httpResponde en el método que usará coockies.
+		 * Las cookes se almacenan bajo la cadena id1/id2/..
+		 * 
+		 * La variable a tratar es, en este caso hitCounter, que es una cadena básica donde se anidan
+		 * las encuestas visitadas.
+		 * 
+		 * 
+		 * ¡ SOLUCIÓN PARA EL SISTEMA DE ENCUESTAS !
+		 * 
+		 * Romper la cadena hiitCounter en un String partiendo por el parámetro '/'
+		 * Si la idPoll que recibe el método está contenido dentro de esta string, lanzar
+		 * una excepción.
+		 * 
+		 * En caso contrario, almacenarla en la coockie y proseguir al guardado
+		 */
+		hitCounter += q + "/";
+		final Cookie cookie = new Cookie("hitCounter", hitCounter.toString());
+		response.addCookie(cookie);
 		res = new ModelAndView("answer/answer");
 		try {
 			final Poll poll = this.pollService.findOne(q);
