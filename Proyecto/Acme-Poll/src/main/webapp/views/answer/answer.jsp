@@ -22,6 +22,18 @@
 
 Page hit counter: <b> ${cookie.hitCounter.value} </b><br/>
 
+<spring:message code="coockies.alert1" var="advice" />
+<jstl:if test="${sw == 1 }">
+
+
+<script>
+
+alert("${advice}");
+document.location.href = 'poll/list.do';
+</script>
+
+</jstl:if>
+
 <b><spring:message code="answer.name" /></b>
 <input type="text" class="form-control" style="width: 30%;" name="name" id="name">
 

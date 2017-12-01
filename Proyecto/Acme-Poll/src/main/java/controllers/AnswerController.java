@@ -39,7 +39,7 @@ public class AnswerController {
 
 	@RequestMapping("/answer")
 	public ModelAndView answer(@RequestParam final Integer q, @CookieValue(value = "hitCounter", defaultValue = "") String hitCounter, final HttpServletResponse response) {
-		ModelAndView res;
+		ModelAndView res = new ModelAndView("answer/answer");
 
 		/*
 		 * Se añade la cabeceras @coockieValue y httpResponde en el método que usará coockies.
@@ -56,11 +56,30 @@ public class AnswerController {
 		 * una excepción.
 		 * 
 		 * En caso contrario, almacenarla en la coockie y proseguir al guardado
+		 * 
+		 * En las líneas siguientes está todo el sistema de coockies implementado
 		 */
-		hitCounter += q + "/";
+
+		/*
+		 * Comprobamos si hemos visitado la encuesta:
+		 * -si ya estaba, no la agregamos, pero llevamos una variable advice que nos indicará
+		 * en el jsp que devemos no permitir entrar en esta encuesta (1º lineas del documento)
+		 * -si no estaba, la agregamos a la coockie y continuamos con el proceso natural
+		 */
+
+		final String[] array = hitCounter.split("/");
+		for (final String string : array)
+			if (string.equals(q.toString())) {	// el break, es porque ya hemos encontrado que la poll ha sido visitada
+				res.addObject("sw", "1");		//	una variable que nos indicará el el jsp que debemos salir de la encuesta por ya estar visitada
+				break;
+			} else
+				hitCounter += q + "/";
+
+		// Dos líneas obligatorias: hay que refrescar la coockie en cada interacción
+		//	Añadirla a la respuesta del http
 		final Cookie cookie = new Cookie("hitCounter", hitCounter.toString());
 		response.addCookie(cookie);
-		res = new ModelAndView("answer/answer");
+
 		try {
 			final Poll poll = this.pollService.findOne(q);
 			this.toSave = q;
