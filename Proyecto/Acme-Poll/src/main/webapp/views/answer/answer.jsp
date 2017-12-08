@@ -20,19 +20,11 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-Page hit counter: <b> ${cookie.hitCounter.value} </b><br/>
+
 
 <spring:message code="coockies.alert1" var="advice" />
-<jstl:if test="${sw == 1 }">
 
 
-<script>
-
-alert("${advice}");
-document.location.href = 'poll/list.do';
-</script>
-
-</jstl:if>
 
 <b><spring:message code="answer.name" /></b>
 <input type="text" class="form-control" style="width: 30%;" name="name" id="name">
@@ -110,12 +102,13 @@ function save(){
 		    data: {'data':res,'city':$('[name="city"]').val(),'gender':$('[name="gender"]').val(),'name':$('[name="name"]').val()},
 		    success: function(result){
 		    	
-		    	//Si el resultado contiene el titulo del listado de poll es que es correcto
+		    	//Si resul es distinto a null se guardaron las respuestas
 		    	if(result !=null && (result.includes('Polls list') || result.includes('Lista de encuestas'))){
-		    		//Redireccion
+		  			
 		   		 	document.location.href = 'poll/list.do';
-		    	}else{
+		    	}else{//en otro caso, se avisa al usuario de que ya había respondido la encuesta
 		    		alert("${alert2}");
+		    		document.location.href = 'poll/list.do';
 		    	}
 		    }
 		}); 

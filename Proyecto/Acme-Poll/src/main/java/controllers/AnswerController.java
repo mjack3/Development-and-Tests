@@ -38,7 +38,7 @@ public class AnswerController {
 
 
 	@RequestMapping("/answer")
-	public ModelAndView answer(@RequestParam final Integer q, @CookieValue(value = "hitCounter", defaultValue = "") String hitCounter, final HttpServletResponse response) {
+	public ModelAndView answer(@RequestParam final Integer q) {
 		ModelAndView res = new ModelAndView("answer/answer");
 
 		/*
@@ -60,26 +60,6 @@ public class AnswerController {
 		 * En las líneas siguientes está todo el sistema de coockies implementado
 		 */
 
-		/*
-		 * Comprobamos si hemos visitado la encuesta:
-		 * -si ya estaba, no la agregamos, pero llevamos una variable advice que nos indicará
-		 * en el jsp que devemos no permitir entrar en esta encuesta (1º lineas del documento)
-		 * -si no estaba, la agregamos a la coockie y continuamos con el proceso natural
-		 */
-
-		final String[] array = hitCounter.split("/");
-		for (final String string : array)
-			if (string.equals(q.toString())) {	// el break, es porque ya hemos encontrado que la poll ha sido visitada
-				res.addObject("sw", "1");		//	una variable que nos indicará el el jsp que debemos salir de la encuesta por ya estar visitada
-				break;
-			} else
-				hitCounter += q + "/";
-
-		// Dos líneas obligatorias: hay que refrescar la coockie en cada interacción
-		//	Añadirla a la respuesta del http
-		final Cookie cookie = new Cookie("hitCounter", hitCounter.toString());
-		response.addCookie(cookie);
-
 		try {
 			final Poll poll = this.pollService.findOne(q);
 			this.toSave = q;
@@ -93,7 +73,7 @@ public class AnswerController {
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
-	public String save(final String data, final String gender, final String city, final String name) {
+	public String save(final String data, final String gender, final String city, final String name, @CookieValue(value = "hitCounter", defaultValue = "") String hitCounter, final HttpServletResponse response) {
 
 		String res = null;
 		final Poll p = this.pollService.findOne(this.toSave);
@@ -110,12 +90,24 @@ public class AnswerController {
 				ansToSave.add(a);
 			}
 
-			//Se usa para diferenciar en la respuesta si ha respondido anteriormente esa encuesta
-			final Object resultado = this.instanceService.save(ansToSave, p, city, gender, name);
-			if (resultado != null)
-				res = "poll/list";
-			else
-				res = "poller/list";
+			/*
+			 * Antes del save: Comprobamos si hemos visitado la encuesta
+			 */
+
+			final String[] array = hitCounter.split("/");
+			for (final String string : array)
+				if (string.equals(this.toSave.toString()))
+					break;	// hemos encontrado que la poll ha sido respondida y se devolverá null
+				else {		// poll no ha sido respondida, se procede a guardar
+					hitCounter += this.toSave + "/";
+					this.instanceService.save(ansToSave, p, city, gender, name);	// no hemos respondido aun la encuesta
+					res = "poll/list";
+				}
+
+			// Dos líneas obligatorias: hay que refrescar la coockie y añadirla al httpResponseServlet
+			final Cookie cookie = new Cookie("hitCounter", hitCounter.toString());
+			response.addCookie(cookie);
+
 		} catch (final Exception e) {
 			res = "poll/list";
 		}

@@ -222,4 +222,11 @@ public class PollService {
 		return this.pollRepository.saveAndFlush(poll);
 	}
 
+	public Poll save(final Poll p) {
+		// TODO Auto-generated method stub
+		Assert.notNull(p);
+		return this.pollRepository.save(p);
+
+	}
+
 }

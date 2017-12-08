@@ -6,13 +6,11 @@ import java.util.HashSet;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -29,7 +27,6 @@ public class Instance extends DomainEntity {
 	private String	city;
 
 
-	@Column(unique = true)
 	public String getName() {
 		return this.name;
 	}

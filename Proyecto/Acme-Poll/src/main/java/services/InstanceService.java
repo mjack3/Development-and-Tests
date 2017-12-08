@@ -1,7 +1,6 @@
 
 package services;
 
-import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -69,16 +68,12 @@ public class InstanceService {
 
 	public Instance save(final List<Answer> ansToSave, final Poll p, final String city, final String gender, final String name) {
 
-		final Collection<Instance> instances = p.getInstances();
-
-		for (final Instance instance : instances)
-			if (instance.getName().equalsIgnoreCase(name))
-				return null;
-
 		final Instance ins = new Instance();
 		ins.setGender(city);
 		ins.setCity(gender);
 		ins.setPoll(p);
+
+		//	se genera un tipo Instance válido
 
 		final List<Answer> ansFinal = new LinkedList<Answer>();
 		for (Answer a : ansToSave) {
@@ -89,11 +84,14 @@ public class InstanceService {
 		ins.setAnswers(ansFinal);
 		ins.setName(name);
 
-		final List<Instance> insts = (List<Instance>) p.getInstances();
-		insts.add(ins);
-		p.setInstances(insts);
+		//	Guardado y actualización de referencias
 
-		return this.instanceRepository.save(ins);
+		final Instance saved = this.instanceRepository.save(ins);
+
+		p.getInstances().add(ins);
+		this.pollService.save(p);
+
+		return saved;
 	}
 
 }
